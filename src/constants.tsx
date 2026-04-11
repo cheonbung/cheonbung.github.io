@@ -569,12 +569,12 @@ export const DATA_EN: PortfolioData = {
   awards: [
     {
       date: "2025.11",
-      title: "University/Graduate Student Idea Competition (Grand Prize)\n(한국전자거래학회 2025 추계학술대회 대학(원)생 아이디어 공모전 최우수상)",
+      title: "University/Graduate Student Idea Competition (Grand Prize)",
       issuer: "The Korea Society for Electronic Commerce"
     },
     {
       date: "2025.11",
-      title: "The Korea Society for Electronic Commerce Fall Conference 2025 (Best Paper Award)\n(한국전자거래학회 2025 추계학술대회 우수논문상)",
+      title: "The Korea Society for Electronic Commerce Fall Conference 2025 (Best Paper Award)",
       issuer: "The Korea Society for Electronic Commerce"
     },
     {
