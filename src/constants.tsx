@@ -416,8 +416,8 @@ export const DATA_KO: PortfolioData = {
       applicant: "중앙대학교 산학협력단"
     },
     {
-      date: "2024-11-14",
-      number: "10-2024-0161744",
+      date: "2024.11.14 (출원) / 2026.02.27 (등록)",
+      number: "10-2024-0161744 (출원) / 10-2934580 (등록)",
       type: "Domestic",
       title: "딥 러닝 기반 자연어 처리 모델을 활용한, 온라인 그루밍 범죄 탐지 방법 및 그 장치\n(METHOD FOR DETECTING ONLINE GROOMING CRIMES USING DEEP LEARNING-BASED NATURAL LANGUAGE PROCESSING MODELS, AND APPARATUS THEREOF)",
       inventors: ["김상민", "이병천", "문지훈", "노승민", "무아잠 마쿠수드"],
@@ -819,8 +819,8 @@ export const DATA_EN: PortfolioData = {
       applicant: "Chung-Ang University Industry-Academic Cooperation Foundation"
     },
     {
-      date: "2024-11-14",
-      number: "10-2024-0161744",
+      date: "Nov 14, 2024 (Filing) / Feb 27, 2026 (Reg.)",
+      number: "10-2024-0161744 (Filing) / 10-2934580 (Reg.)",
       type: "Domestic",
       title: "METHOD FOR DETECTING ONLINE GROOMING CRIMES USING DEEP LEARNING-BASED NATURAL LANGUAGE PROCESSING MODELS, AND APPARATUS THEREOF",
       inventors: ["Sangmin Kim", "Byeongcheon Lee", "Jihoon Moon", "Seungmin Rho", "Muazzam Maqsood"],

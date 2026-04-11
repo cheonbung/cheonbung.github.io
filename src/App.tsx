@@ -51,7 +51,6 @@ function App() {
     });
   };
 
-  // 실적 카운트 데이터
   const stats = [
     { label: data.ui.stats.journals, count: data.publications.length, icon: Book },
     { label: data.ui.stats.conferences, count: data.conferences.length, icon: Building2 },
@@ -74,10 +73,7 @@ function App() {
         {/* Profile Section */}
         <Section id="about" title={data.ui.about}>
           <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-start">
-
-            {/* Left Column: Image & Stats */}
             <div className="flex flex-col gap-5 shrink-0 w-full md:w-auto items-center md:items-stretch">
-              {/* Profile Image - 부드러운 그림자 적용 */}
               <div className="w-48 h-64 bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100 relative self-center">
                 <img
                   src={data.profile.imagePath}
@@ -85,8 +81,6 @@ function App() {
                   className="w-full h-full object-cover"
                 />
               </div>
-
-              {/* Stats Cards - 디자인 강화 (PC View) */}
               <div className="hidden md:flex flex-col gap-3 w-full">
                 {stats.map((stat, idx) => {
                   const Icon = stat.icon;
@@ -105,10 +99,7 @@ function App() {
               </div>
             </div>
 
-            {/* Right Column: Profile Info */}
             <div className="flex-1 space-y-7 w-full">
-
-              {/* Header: Name, Role, Lab */}
               <div>
                 <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">{data.profile.name}</h1>
                 <div className="mt-3 space-y-1.5">
@@ -127,16 +118,13 @@ function App() {
                 </div>
               </div>
 
-              {/* Bio (Self Introduction) - [수정됨] 아이콘과 텍스트 분리 */}
               <div className="relative bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
                 <Quote className="absolute top-6 left-5 text-blue-100 w-8 h-8 fill-blue-50" />
-                {/* pl-10을 주어 텍스트가 아이콘을 피하도록 설정 */}
                 <div className="relative z-10 text-slate-700 leading-8 text-base break-keep pl-10">
                   {data.profile.bio}
                 </div>
               </div>
 
-              {/* Research Interests Tags - 디자인 다듬기 */}
               <div className="flex flex-wrap gap-2.5">
                 {data.profile.interests.map((interest, idx) => (
                   <span key={idx} className="px-3.5 py-1.5 bg-indigo-50/80 text-indigo-600 rounded-full text-sm font-semibold border border-indigo-100/50 hover:bg-indigo-100 transition-colors cursor-default">
@@ -145,7 +133,6 @@ function App() {
                 ))}
               </div>
 
-              {/* Contact & Info Box */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div className="flex items-center gap-3 p-3.5 rounded-xl border border-slate-100 bg-white shadow-sm hover:border-blue-100 transition-all">
                   <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
@@ -193,7 +180,6 @@ function App() {
                 </div>
               </div>
 
-              {/* Stats for Mobile only */}
               <div className="grid grid-cols-3 gap-3 md:hidden pt-4 border-t border-slate-100">
                 {stats.map((stat, idx) => {
                   const Icon = stat.icon;
@@ -206,7 +192,6 @@ function App() {
                   );
                 })}
               </div>
-
             </div>
           </div>
         </Section>
@@ -254,8 +239,8 @@ function App() {
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-3 mb-2">
                       <h4 className="font-bold text-slate-800 text-base leading-snug whitespace-pre-line">{pub.title}</h4>
                       <span className={`shrink-0 px-2.5 py-1 text-[10px] uppercase tracking-wide font-bold rounded-full ${pub.type === 'SCIE' ? 'bg-orange-100 text-orange-700' :
-                          pub.type === 'SSCI' ? 'bg-purple-100 text-purple-700' :
-                            'bg-slate-100 text-slate-600'
+                        pub.type === 'SSCI' ? 'bg-purple-100 text-purple-700' :
+                          'bg-slate-100 text-slate-600'
                         }`}>
                         {pub.type}
                       </span>
@@ -298,32 +283,37 @@ function App() {
           </div>
         </Section>
 
-        {/* Patents Section */}
+        {/* Patents Section - UI IMPROVED */}
         <Section id="patents" title={data.ui.patents}>
-          <div className="grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-6">
             {data.patents.map((patent, idx) => (
-              <div key={idx} className="flex flex-col md:flex-row gap-5 p-5 border border-slate-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+              <div key={idx} className="flex flex-col md:flex-row gap-5 p-6 border border-slate-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
                 <div className="shrink-0">
-                  <div className={`w-auto px-3 min-w-[3rem] h-12 rounded-xl flex items-center justify-center font-bold text-white text-sm shadow-sm ${patent.type === 'PCT' ? 'bg-indigo-500' : 'bg-slate-500'
+                  <div className={`w-auto px-4 min-w-[3.5rem] h-14 rounded-xl flex items-center justify-center font-bold text-white text-sm shadow-sm ${patent.type === 'PCT' ? 'bg-indigo-500' : 'bg-slate-600'
                     }`}>
                     {patent.type}
                   </div>
                 </div>
-                <div className="flex-1">
-                  <h4 className="font-bold text-slate-900 mb-2 leading-snug whitespace-pre-line">{patent.title}</h4>
-                  <div className="text-sm text-slate-600 mb-3">
+                <div className="flex-1 space-y-3">
+                  <h4 className="font-bold text-slate-900 text-lg leading-snug whitespace-pre-line">{patent.title}</h4>
+                  <div className="text-sm text-slate-600">
                     {formatAuthors(patent.inventors)}
                   </div>
-                  <div className="flex flex-wrap gap-2 text-xs text-slate-500">
-                    <span className="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded border border-slate-100">
-                      <span className="font-bold text-slate-400">No:</span> {patent.number}
-                    </span>
-                    <span className="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded border border-slate-100">
-                      <span className="font-bold text-slate-400">Date:</span> {patent.date}
-                    </span>
-                    <span className="flex items-center gap-1 bg-slate-50 px-2 py-1 rounded border border-slate-100">
-                      <span className="font-bold text-slate-400">Applicant:</span> {patent.applicant}
-                    </span>
+
+                  {/* Patent Metadata Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6 text-xs text-slate-500 pt-2 border-t border-slate-50">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-bold text-slate-400 uppercase tracking-tighter">Number</span>
+                      <span className="text-slate-700 font-medium bg-slate-50 px-2 py-1 rounded">{patent.number}</span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-bold text-slate-400 uppercase tracking-tighter">Date</span>
+                      <span className="text-slate-700 font-medium bg-slate-50 px-2 py-1 rounded">{patent.date}</span>
+                    </div>
+                    <div className="flex flex-col gap-1 sm:col-span-2">
+                      <span className="font-bold text-slate-400 uppercase tracking-tighter">Applicant</span>
+                      <span className="text-slate-700 font-medium bg-slate-50 px-2 py-1 rounded">{patent.applicant}</span>
+                    </div>
                   </div>
                 </div>
               </div>
