@@ -15,6 +15,7 @@ function App() {
   const [courseworkTab, setCourseworkTab] = useState<'grad' | 'undergrad'>('grad');
 
   const data = language === 'KO' ? DATA_KO : DATA_EN;
+  const activeCourseSection = courseworkTab === 'grad' ? data.gradCourses : data.undergradCourses;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -81,18 +82,18 @@ function App() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="hidden md:flex flex-col gap-3 w-full">
+              <div className="flex flex-col gap-2.5 w-full">
                 {stats.map((stat, idx) => {
                   const Icon = stat.icon;
                   return (
-                    <div key={idx} className="flex items-center justify-between bg-white border border-slate-100 p-4 rounded-xl shadow-sm hover:shadow-md hover:border-blue-100 transition-all group">
-                      <div className="flex items-center gap-3 text-slate-500 font-bold uppercase text-xs tracking-wider">
-                        <div className="p-1.5 bg-slate-50 rounded-lg group-hover:bg-blue-50 transition-colors">
-                          <Icon size={16} className="group-hover:text-blue-600" />
+                    <div key={idx} className="flex items-center justify-between bg-white border border-slate-100 p-3 md:p-4 rounded-xl shadow-sm hover:shadow-md hover:border-blue-100 transition-all group">
+                      <div className="flex items-center gap-2.5 md:gap-3 text-slate-500 font-bold uppercase text-[10px] md:text-xs tracking-wider">
+                        <div className="p-1 md:p-1.5 bg-slate-50 rounded-lg group-hover:bg-blue-50 transition-colors">
+                          <Icon size={14} className="md:w-4 md:h-4 group-hover:text-blue-600" />
                         </div>
                         {stat.label}
                       </div>
-                      <div className="text-2xl font-extrabold text-slate-800 group-hover:text-blue-600 transition-colors">{stat.count}</div>
+                      <div className="text-xl md:text-2xl font-extrabold text-slate-800 group-hover:text-blue-600 transition-colors">{stat.count}</div>
                     </div>
                   );
                 })}
@@ -167,7 +168,7 @@ function App() {
                     <div className="flex flex-wrap gap-2">
                       {data.languages.map((lang, idx) => (
                         <span key={idx} className="px-2.5 py-1 bg-slate-50 text-slate-700 rounded-md text-xs font-semibold border border-slate-200">
-                          {lang.name}: <span className="text-blue-600">{lang.score}</span>
+                          {lang.testName ? `${lang.name} (${lang.testName})` : lang.name}: <span className="text-blue-600">{lang.score}</span>
                         </span>
                       ))}
                       {data.certifications.map((cert, idx) => (
@@ -180,18 +181,6 @@ function App() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3 md:hidden pt-4 border-t border-slate-100">
-                {stats.map((stat, idx) => {
-                  const Icon = stat.icon;
-                  return (
-                    <div key={idx} className="bg-white p-3 rounded-xl text-center border border-slate-100 shadow-sm">
-                      <div className="flex justify-center mb-1 text-slate-400"><Icon size={20} /></div>
-                      <div className="text-2xl font-extrabold text-blue-600">{stat.count}</div>
-                      <div className="text-[10px] text-slate-500 font-bold uppercase">{stat.label}</div>
-                    </div>
-                  );
-                })}
-              </div>
             </div>
           </div>
         </Section>
@@ -365,14 +354,14 @@ function App() {
             <table className="w-full text-sm text-left">
               <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
                 <tr>
-                  <th className="px-6 py-3 font-semibold">{courseworkTab === 'grad' ? data.gradCourses.headers.period : data.undergradCourses.headers.period}</th>
-                  <th className="px-6 py-3 font-semibold">{courseworkTab === 'grad' ? data.gradCourses.headers.name : data.undergradCourses.headers.name}</th>
-                  <th className="px-6 py-3 font-semibold text-center">{courseworkTab === 'grad' ? data.gradCourses.headers.credits : data.undergradCourses.headers.credits}</th>
-                  <th className="px-6 py-3 font-semibold text-right">{courseworkTab === 'grad' ? data.gradCourses.headers.grade : data.undergradCourses.headers.grade}</th>
+                  <th className="px-6 py-3 font-semibold">{activeCourseSection.headers.period}</th>
+                  <th className="px-6 py-3 font-semibold">{activeCourseSection.headers.name}</th>
+                  <th className="px-6 py-3 font-semibold text-center">{activeCourseSection.headers.credits}</th>
+                  <th className="px-6 py-3 font-semibold text-right">{activeCourseSection.headers.grade}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 bg-white">
-                {(courseworkTab === 'grad' ? data.gradCourses : data.undergradCourses).courses.map((course, idx) => (
+                {activeCourseSection.courses.map((course, idx) => (
                   <tr key={idx} className="hover:bg-slate-50 transition-colors">
                     <td className="px-6 py-3 font-mono text-slate-500 text-xs">{course.period}</td>
                     <td className="px-6 py-3 font-medium text-slate-800">{course.name}</td>
@@ -385,8 +374,9 @@ function App() {
           </div>
         </Section>
 
-        <div className="mt-16 mb-8 text-center text-slate-400 text-xs font-medium">
+        <div className="mt-16 mb-8 text-center text-slate-400 text-xs font-medium space-y-1">
           <p>{data.ui.designedBy}</p>
+          <p>{data.ui.lastUpdated}: {data.ui.lastUpdatedDate}</p>
         </div>
 
       </main>
