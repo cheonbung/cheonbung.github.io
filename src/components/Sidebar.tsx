@@ -40,9 +40,25 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 w-full bg-white z-50 border-b border-gray-200 px-4 py-3 flex items-center justify-between shadow-sm">
         <span className="font-bold text-lg text-slate-800">{data.profile.name}</span>
-        <button onClick={toggleSidebar} className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg">
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2">
+          <div className="flex bg-slate-100 rounded-lg p-0.5">
+            <button
+              onClick={() => setLanguage('KO')}
+              className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${language === 'KO' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-400'}`}
+            >
+              한글
+            </button>
+            <button
+              onClick={() => setLanguage('EN')}
+              className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${language === 'EN' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400'}`}
+            >
+              ENG
+            </button>
+          </div>
+          <button onClick={toggleSidebar} className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg">
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Sidebar Container */}

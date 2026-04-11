@@ -167,27 +167,32 @@ export const DATA_KO: PortfolioData = {
     {
       date: "2025.11",
       title: "한국전자거래학회 2025 추계학술대회 대학(원)생 아이디어 공모전 (최우수상)",
-      issuer: "한국전자거래학회"
+      issuer: "한국전자거래학회",
+      rank: "gold"
     },
     {
       date: "2025.11",
       title: "한국전자거래학회 2025 추계학술대회 (우수논문상)",
-      issuer: "한국전자거래학회"
+      issuer: "한국전자거래학회",
+      rank: "silver"
     },
     {
       date: "2024.11",
       title: "DID(Decentralized Identity) 비즈니스 모델 특허 아이디어 공모전 (장려상)",
-      issuer: "한국전자거래학회"
+      issuer: "한국전자거래학회",
+      rank: "bronze"
     },
     {
       date: "2023.05",
       title: "ASK 2023 학부생논문경진대회 (동상)",
-      issuer: "한국정보처리학회"
+      issuer: "한국정보처리학회",
+      rank: "bronze"
     },
     {
       date: "2022.12",
       title: "한국전자거래학회 2022 추계학술대회 (우수논문상)",
-      issuer: "한국전자거래학회"
+      issuer: "한국전자거래학회",
+      rank: "silver"
     }
   ],
   publications: [
@@ -570,27 +575,32 @@ export const DATA_EN: PortfolioData = {
     {
       date: "2025.11",
       title: "University/Graduate Student Idea Competition (Grand Prize)",
-      issuer: "The Korea Society for Electronic Commerce"
+      issuer: "The Korea Society for Electronic Commerce",
+      rank: "gold"
     },
     {
       date: "2025.11",
       title: "The Korea Society for Electronic Commerce Fall Conference 2025 (Best Paper Award)",
-      issuer: "The Korea Society for Electronic Commerce"
+      issuer: "The Korea Society for Electronic Commerce",
+      rank: "silver"
     },
     {
       date: "2024.11",
       title: "DID(Decentralized Identity) Business Model Patent Idea Contest (Encouragement Award)",
-      issuer: "The Korea Society for Electronic Commerce"
+      issuer: "The Korea Society for Electronic Commerce",
+      rank: "bronze"
     },
     {
       date: "2023.05",
       title: "ASK 2023 Undergraduate Paper Competition (Bronze Award)",
-      issuer: "Korea Information Processing Society"
+      issuer: "Korea Information Processing Society",
+      rank: "bronze"
     },
     {
       date: "2022.12",
       title: "The Korea Society for Electronic Commerce Fall Conference 2022 (Best Paper Award)",
-      issuer: "The Korea Society for Electronic Commerce"
+      issuer: "The Korea Society for Electronic Commerce",
+      rank: "silver"
     }
   ],
   publications: [
@@ -656,7 +666,7 @@ export const DATA_EN: PortfolioData = {
     {
       date: "2025.10",
       type: "International Conference",
-      title: "A Class-Selective Unlearning Framework for Pattern-Preserving Generative Models",
+      title: "Discriminator-Guided Unlearning: A Framework for Selective Forgetting in Conditional GANs",
       authors: ["Byeongcheon Lee", "Sangmin Kim", "Sungwoo Park", "Seungmin Rho", "Miyoung Lee"],
       journalOrConference: "28th European Conference on Artificial Intelligence (ECAI2025)",
       note: "Workshop Paper (TRUST-AI)"

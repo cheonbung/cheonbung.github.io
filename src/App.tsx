@@ -18,25 +18,37 @@ function App() {
   const activeCourseSection = courseworkTab === 'grad' ? data.gradCourses : data.undergradCourses;
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['about', 'education', 'publications', 'patents', 'awards', 'coursework'];
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top >= 0 && rect.top <= 300) {
-            setActiveSection(section);
-            break;
+    const sections = ['about', 'education', 'publications', 'patents', 'awards', 'coursework'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
           }
-        }
-      }
-    };
+        });
+      },
+      { rootMargin: '-10% 0px -80% 0px', threshold: 0 }
+    );
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
+  const displayType = (type: string) =>
+    language === 'EN' && type === 'Domestic' ? 'KR Domestic' : type;
+
+  const getAwardIconStyle = (rank?: string) => {
+    if (rank === 'gold') return 'bg-yellow-50 text-yellow-500';
+    if (rank === 'silver') return 'bg-slate-100 text-slate-400';
+    if (rank === 'bronze') return 'bg-orange-50 text-orange-500';
+    return 'bg-yellow-50 text-yellow-500';
+  };
 
   const formatAuthors = (authors: string[]) => {
     return authors.map((author, index) => {
@@ -231,7 +243,7 @@ function App() {
                         pub.type === 'SSCI' ? 'bg-purple-100 text-purple-700' :
                           'bg-slate-100 text-slate-600'
                         }`}>
-                        {pub.type}
+                        {displayType(pub.type)}
                       </span>
                     </div>
                     <p className="text-sm text-slate-600 mb-3 leading-relaxed">
@@ -315,7 +327,7 @@ function App() {
           <ul className="space-y-4">
             {data.awards.map((award, idx) => (
               <li key={idx} className="flex gap-4 items-start p-3 rounded-lg hover:bg-slate-50 transition-colors">
-                <div className="mt-1 p-2 bg-yellow-50 text-yellow-600 rounded-full shadow-sm">
+                <div className={`mt-1 p-2 rounded-full shadow-sm ${getAwardIconStyle(award.rank)}`}>
                   <AwardIcon size={20} />
                 </div>
                 <div>
@@ -374,9 +386,8 @@ function App() {
           </div>
         </Section>
 
-        <div className="mt-16 mb-8 text-center text-slate-400 text-xs font-medium space-y-1">
+        <div className="mt-16 mb-8 text-center text-slate-400 text-xs font-medium">
           <p>{data.ui.designedBy}</p>
-          <p>{data.ui.lastUpdated}: {data.ui.lastUpdatedDate}</p>
         </div>
 
       </main>
