@@ -253,7 +253,7 @@ export const DATA_KO: PortfolioData = {
     {
       date: "2025.10",
       type: "International Conference",
-      title: "Discriminator-Guided Unlearning A Framework for Selective Forgetting in Conditional GANs\n(패턴 보존 기반 생성 모델의 클래스 선택적 언러닝 프레임워크)",
+      title: "Discriminator-Guided Unlearning: A Framework for Selective Forgetting in Conditional GANs",
       authors: ["Byeongcheon Lee", "Sangmin Kim", "Sungwoo Park", "Seungmin Rho", "Miyoung Lee"],
       journalOrConference: "28th European Conference on Artificial Intelligence (ECAI2025)",
       note: "Workshop Paper (TRUST-AI)"
