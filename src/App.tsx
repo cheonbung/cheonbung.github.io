@@ -5,7 +5,8 @@ import { DATA_KO, DATA_EN } from './constants';
 import { Language } from './types';
 import {
   Mail, ExternalLink, Calendar, CheckCircle,
-  Award as AwardIcon, Book, Building2, Github, Linkedin, ScrollText, ArrowUpRight, Quote
+  Award as AwardIcon, Book, BookOpen, Building2, Github, Linkedin, ScrollText, ArrowUpRight, Quote,
+  User, GraduationCap, FileText
 } from 'lucide-react';
 
 function App() {
@@ -84,7 +85,7 @@ function App() {
       <main className="flex-1 lg:ml-64 p-4 lg:p-12 pt-20 lg:pt-12 transition-all duration-300 max-w-5xl mx-auto w-full">
 
         {/* Profile Section */}
-        <Section id="about" title={data.ui.about}>
+        <Section id="about" title={data.ui.about} icon={User}>
           <div className="flex flex-col md:flex-row gap-8 lg:gap-10 items-start">
             <div className="flex flex-col gap-5 shrink-0 w-full md:w-auto items-center md:items-stretch">
               <div className="w-48 h-64 bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100 relative self-center">
@@ -98,7 +99,7 @@ function App() {
                 {stats.map((stat, idx) => {
                   const Icon = stat.icon;
                   return (
-                    <div key={idx} className="flex items-center justify-between bg-white border border-slate-100 p-3 md:p-4 rounded-xl shadow-sm hover:shadow-md hover:border-blue-100 transition-all group">
+                    <div key={idx} className="flex items-center justify-between bg-slate-50 border border-slate-100 p-3 md:p-4 rounded-xl hover:shadow-sm hover:border-blue-100 transition-all group">
                       <div className="flex items-center gap-2.5 md:gap-3 text-slate-500 font-bold uppercase text-[10px] md:text-xs tracking-wider">
                         <div className="p-1 md:p-1.5 bg-slate-50 rounded-lg group-hover:bg-blue-50 transition-colors">
                           <Icon size={14} className="md:w-4 md:h-4 group-hover:text-blue-600" />
@@ -131,7 +132,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="relative bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+              <div className="relative bg-slate-50 p-6 rounded-2xl border border-slate-100">
                 <Quote className="absolute top-6 left-5 text-blue-100 w-8 h-8 fill-blue-50" />
                 <div className="relative z-10 text-slate-700 leading-8 text-base break-keep pl-10">
                   {data.profile.bio}
@@ -147,7 +148,7 @@ function App() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="flex items-center gap-3 p-3.5 rounded-xl border border-slate-100 bg-white shadow-sm hover:border-blue-100 transition-all">
+                <div className="flex items-center gap-3 p-3.5 rounded-xl border border-slate-100 bg-slate-50 hover:border-blue-100 transition-all">
                   <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
                     <Mail size={18} />
                   </div>
@@ -158,7 +159,7 @@ function App() {
                 </div>
 
                 {data.profile.github && (
-                  <div className="flex items-center gap-3 p-3.5 rounded-xl border border-slate-100 bg-white shadow-sm hover:border-blue-100 transition-all">
+                  <div className="flex items-center gap-3 p-3.5 rounded-xl border border-slate-100 bg-slate-50 hover:border-blue-100 transition-all">
                     <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-700 shrink-0">
                       <Github size={18} />
                     </div>
@@ -171,7 +172,7 @@ function App() {
                   </div>
                 )}
 
-                <div className="flex items-start gap-3 p-4 rounded-xl border border-slate-100 bg-white shadow-sm sm:col-span-2">
+                <div className="flex items-start gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50 sm:col-span-2">
                   <div className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
                     <CheckCircle size={18} />
                   </div>
@@ -198,7 +199,7 @@ function App() {
         </Section>
 
         {/* Education Section */}
-        <Section id="education" title={data.ui.education}>
+        <Section id="education" title={data.ui.education} icon={GraduationCap}>
           <div className="relative border-l-2 border-slate-200 ml-3 space-y-12 py-2">
             {data.education.map((edu, idx) => (
               <div key={idx} className="relative pl-8 group">
@@ -227,7 +228,7 @@ function App() {
         </Section>
 
         {/* Publications Section */}
-        <Section id="publications" title={data.ui.publications}>
+        <Section id="publications" title={data.ui.publications} icon={BookOpen}>
           <div className="space-y-10">
             <div>
               <h3 className="text-lg font-bold text-slate-800 mb-5 flex items-center gap-2 border-b border-slate-200 pb-3">
@@ -263,19 +264,30 @@ function App() {
                 <Building2 size={22} className="text-blue-600" />
                 {data.ui.confPresentations}
               </h3>
-              <div className="space-y-4">
+              <div className="grid gap-4">
                 {data.conferences.map((conf, idx) => (
-                  <div key={idx} className="group relative pl-5 border-l-2 border-slate-200 hover:border-blue-400 transition-colors py-1">
-                    <h4 className="font-medium text-slate-800 text-sm md:text-base leading-snug group-hover:text-blue-700 transition-colors whitespace-pre-line">{conf.title}</h4>
-                    <p className="text-xs md:text-sm text-slate-500 mt-1">{formatAuthors(conf.authors)}</p>
-                    <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-xs text-slate-400">
-                      <span className="font-medium text-slate-600">{conf.journalOrConference}</span>
-                      <span>{conf.date}</span>
-                      {conf.note && (
-                        <span className="text-amber-600 font-bold flex items-center gap-1 bg-amber-50 px-1.5 py-0.5 rounded">
-                          <AwardIcon size={12} /> {conf.note}
-                        </span>
-                      )}
+                  <div key={idx} className="p-5 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-300">
+                    <div className="flex flex-col sm:flex-row justify-between items-start gap-3 mb-2">
+                      <h4 className="font-bold text-slate-800 text-base leading-snug whitespace-pre-line">{conf.title}</h4>
+                      <span className={`shrink-0 px-2.5 py-1 text-[10px] uppercase tracking-wide font-bold rounded-full ${
+                        conf.type === 'International Conference' ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'
+                      }`}>
+                        {displayType(conf.type)}
+                      </span>
+                    </div>
+                    <p className="text-sm text-slate-600 mb-3 leading-relaxed">
+                      {formatAuthors(conf.authors)}
+                    </p>
+                    <div className="flex flex-wrap justify-between items-center gap-2 text-xs md:text-sm">
+                      <span className="font-semibold text-blue-700 italic">{conf.journalOrConference}</span>
+                      <div className="flex items-center gap-3">
+                        {conf.note && (
+                          <span className="text-amber-600 font-bold flex items-center gap-1 bg-amber-50 px-2 py-0.5 rounded-full text-xs">
+                            <AwardIcon size={12} /> {conf.note}
+                          </span>
+                        )}
+                        <span className="text-slate-400 font-mono">{conf.date}</span>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -285,7 +297,7 @@ function App() {
         </Section>
 
         {/* Patents Section - UI IMPROVED */}
-        <Section id="patents" title={data.ui.patents}>
+        <Section id="patents" title={data.ui.patents} icon={ScrollText}>
           <div className="grid grid-cols-1 gap-6">
             {data.patents.map((patent, idx) => (
               <div key={idx} className="flex flex-col md:flex-row gap-5 p-6 border border-slate-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
@@ -323,15 +335,26 @@ function App() {
         </Section>
 
         {/* Awards Section */}
-        <Section id="awards" title={data.ui.awards}>
+        <Section id="awards" title={data.ui.awards} icon={AwardIcon}>
           <ul className="space-y-4">
             {data.awards.map((award, idx) => (
               <li key={idx} className="flex gap-4 items-start p-3 rounded-lg hover:bg-slate-50 transition-colors">
-                <div className={`mt-1 p-2 rounded-full shadow-sm ${getAwardIconStyle(award.rank)}`}>
+                <div className={`mt-1 p-2 rounded-full shadow-sm shrink-0 ${getAwardIconStyle(award.rank)}`}>
                   <AwardIcon size={20} />
                 </div>
-                <div>
-                  <h4 className="font-bold text-slate-800">{award.title}</h4>
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h4 className="font-bold text-slate-800">{award.title}</h4>
+                    {award.rank && (
+                      <span className={`px-2 py-0.5 text-[10px] uppercase tracking-wide font-bold rounded-full shrink-0 ${
+                        award.rank === 'gold' ? 'bg-yellow-100 text-yellow-700' :
+                        award.rank === 'silver' ? 'bg-slate-100 text-slate-600' :
+                        'bg-orange-100 text-orange-700'
+                      }`}>
+                        {award.rank}
+                      </span>
+                    )}
+                  </div>
                   <div className="flex gap-2 text-sm text-slate-500 mt-1 font-medium">
                     <span>{award.issuer}</span>
                     <span className="text-slate-300">•</span>
@@ -344,8 +367,8 @@ function App() {
         </Section>
 
         {/* Coursework Section */}
-        <Section id="coursework" title={data.ui.coursework}>
-          <div className="flex gap-2 mb-6 p-1 bg-slate-100 rounded-lg inline-flex">
+        <Section id="coursework" title={data.ui.coursework} icon={FileText}>
+          <div className="inline-flex gap-2 mb-6 p-1 bg-slate-100 rounded-lg">
             <button
               onClick={() => setCourseworkTab('grad')}
               className={`px-5 py-2 rounded-md text-sm font-bold transition-all shadow-sm ${courseworkTab === 'grad' ? 'bg-white text-blue-600' : 'text-slate-500 hover:text-slate-700 bg-transparent shadow-none'
@@ -386,7 +409,8 @@ function App() {
           </div>
         </Section>
 
-        <div className="mt-16 mb-8 text-center text-slate-400 text-xs font-medium">
+        <div className="mt-16 mb-8 text-center text-slate-400 text-xs font-medium space-y-1">
+          <p>{data.ui.lastUpdated}: {data.ui.lastUpdatedDate}</p>
           <p>{data.ui.designedBy}</p>
         </div>
 

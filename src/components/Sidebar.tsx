@@ -50,7 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             </button>
             <button
               onClick={() => setLanguage('EN')}
-              className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${language === 'EN' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400'}`}
+              className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${language === 'EN' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-400'}`}
             >
               ENG
             </button>
@@ -112,7 +112,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             </button>
             <button
               onClick={() => setLanguage('EN')}
-              className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${language === 'EN' ? 'bg-blue-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+              className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${language === 'EN' ? 'bg-slate-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
             >
               ENG
             </button>
