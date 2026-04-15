@@ -83,6 +83,19 @@ npm run deploy
 
 ---
 
+## 콘텐츠 수정 시 반드시 함께 업데이트할 것
+
+콘텐츠(수상, 논문, 특허 등)를 추가하거나 변경할 때마다 `src/constants.tsx`의 **`lastUpdatedDate`를 오늘 날짜로 수정**해야 한다.
+
+```ts
+// DATA_KO와 DATA_EN 두 곳 모두
+lastUpdatedDate: "YYYY.MM.DD",  // 예: "2026.04.15"
+```
+
+> **과거 실수 (2026.04.15)**: 수상 이력을 추가하면서 `lastUpdatedDate`를 갱신하지 않아 사이트에 잘못된 날짜가 표시됨.
+
+---
+
 ## 검증
 
 코드 수정 후 배포 전에 검증 스크립트를 실행:

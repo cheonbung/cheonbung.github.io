@@ -53,7 +53,7 @@ export const DATA_KO: PortfolioData = {
     undergradCourses: "학부",
     designedBy: "Designed for academic presentation.",
     lastUpdated: "최종 업데이트",
-    lastUpdatedDate: "2026.04.11",
+    lastUpdatedDate: "2026.04.15",
     stats: {
       journals: "저널 논문",
       conferences: "학술대회",
@@ -467,7 +467,7 @@ export const DATA_EN: PortfolioData = {
     undergradCourses: "Undergraduate",
     designedBy: "Designed for academic presentation.",
     lastUpdated: "Last Updated",
-    lastUpdatedDate: "2026.04.11",
+    lastUpdatedDate: "2026.04.15",
     stats: {
       journals: "Journals",
       conferences: "Conferences",
