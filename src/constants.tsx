@@ -165,6 +165,12 @@ export const DATA_KO: PortfolioData = {
   certifications: COMMON_CERTIFICATIONS,
   awards: [
     {
+      date: "2026.03",
+      title: "2025학년도 CAU-Junior 융합연구그룹 (우수상)",
+      issuer: "중앙대학교 미래융합원",
+      rank: "silver"
+    },
+    {
       date: "2025.11",
       title: "한국전자거래학회 2025 추계학술대회 대학(원)생 아이디어 공모전 (최우수상)",
       issuer: "한국전자거래학회",
@@ -572,6 +578,12 @@ export const DATA_EN: PortfolioData = {
   languages: COMMON_LANGUAGES,
   certifications: COMMON_CERTIFICATIONS,
   awards: [
+    {
+      date: "2026.03",
+      title: "2025 CAU-Junior Convergence Research Group (Excellence Award)",
+      issuer: "Chung-Ang University Institute of Future Convergence",
+      rank: "silver"
+    },
     {
       date: "2025.11",
       title: "University/Graduate Student Idea Competition (Grand Prize)",
