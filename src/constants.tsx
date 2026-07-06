@@ -136,7 +136,6 @@ export const DATA_KO: PortfolioData = {
       { period: "2025.03~2025.06", name: "AI 프로그래밍", credits: 3, grade: "4.5/4.5" },
       { period: "2026.03~2026.06", name: "산업보안현장과보안컨설팅", credits: 3, grade: "4.5/4.5" },
       { period: "2026.03~2026.06", name: "보안데이터과학", credits: 3, grade: "4/4.5" },
-      { period: "2026.03~2026.06", name: "연구윤리 및 논문작성법", credits: 1, grade: "P/F" },
       { period: "2026.03~2026.06", name: "방위산업보안관리", credits: 3, grade: "4.5/4.5" },
     ]
   },
@@ -568,7 +567,6 @@ export const DATA_EN: PortfolioData = {
       { period: "2025.03~2025.06", name: "AI Programming", credits: 3, grade: "4.5/4.5" },
       { period: "2026.03~2026.06", name: "Industrial Security Field Practice and Security Consulting", credits: 3, grade: "4.5/4.5" },
       { period: "2026.03~2026.06", name: "Security Data Science", credits: 3, grade: "4/4.5" },
-      { period: "2026.03~2026.06", name: "Research Ethics and Thesis Writing", credits: 1, grade: "P/F" },
       { period: "2026.03~2026.06", name: "Defense Industry Security Management", credits: 3, grade: "4.5/4.5" },
     ]
   },
