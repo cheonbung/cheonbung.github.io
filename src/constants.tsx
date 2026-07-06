@@ -122,7 +122,7 @@ export const DATA_KO: PortfolioData = {
   ],
   gradCourses: {
     title: "대학원 주요 수강과목",
-    gpa: "4.25 / 4.5",
+    gpa: "4.33 / 4.5",
     headers: { period: "기간", name: "과목명", credits: "학점", grade: "성적" },
     courses: [
       { period: "2024.03~2024.06", name: "산업보안학", credits: 3, grade: "4.5/4.5" },
@@ -134,6 +134,10 @@ export const DATA_KO: PortfolioData = {
       { period: "2024.09~2024.12", name: "인공지능 규제와 신뢰성", credits: 3, grade: "4/4.5" },
       { period: "2024.09~2024.12", name: "디지털 금융서비스와 보안", credits: 3, grade: "4.5/4.5" },
       { period: "2025.03~2025.06", name: "AI 프로그래밍", credits: 3, grade: "4.5/4.5" },
+      { period: "2026.03~2026.06", name: "산업보안현장과보안컨설팅", credits: 3, grade: "4.5/4.5" },
+      { period: "2026.03~2026.06", name: "보안데이터과학", credits: 3, grade: "4/4.5" },
+      { period: "2026.03~2026.06", name: "연구윤리 및 논문작성법", credits: 1, grade: "P/F" },
+      { period: "2026.03~2026.06", name: "방위산업보안관리", credits: 3, grade: "4.5/4.5" },
     ]
   },
   undergradCourses: {
@@ -550,7 +554,7 @@ export const DATA_EN: PortfolioData = {
   ],
   gradCourses: {
     title: "Major Graduate Coursework",
-    gpa: "4.25 / 4.5",
+    gpa: "4.33 / 4.5",
     headers: { period: "Period", name: "Course Name", credits: "Credits", grade: "Grade" },
     courses: [
       { period: "2024.03~2024.06", name: "Industrial Security", credits: 3, grade: "4.5/4.5" },
@@ -562,6 +566,10 @@ export const DATA_EN: PortfolioData = {
       { period: "2024.09~2024.12", name: "AI Regulation and Trustworthiness", credits: 3, grade: "4/4.5" },
       { period: "2024.09~2024.12", name: "Digital Finance Service and Security", credits: 3, grade: "4.5/4.5" },
       { period: "2025.03~2025.06", name: "AI Programming", credits: 3, grade: "4.5/4.5" },
+      { period: "2026.03~2026.06", name: "Industrial Security Field Practice and Security Consulting", credits: 3, grade: "4.5/4.5" },
+      { period: "2026.03~2026.06", name: "Security Data Science", credits: 3, grade: "4/4.5" },
+      { period: "2026.03~2026.06", name: "Research Ethics and Thesis Writing", credits: 1, grade: "P/F" },
+      { period: "2026.03~2026.06", name: "Defense Industry Security Management", credits: 3, grade: "4.5/4.5" },
     ]
   },
   undergradCourses: {
