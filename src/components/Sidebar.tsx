@@ -22,6 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     { id: 'publications', label: ui.publications, icon: BookOpen },
     { id: 'patents', label: ui.patents, icon: ScrollText },
     { id: 'awards', label: ui.awards, icon: Award },
+    { id: 'overseas', label: ui.overseasExperience, icon: Globe },
     { id: 'coursework', label: ui.coursework, icon: FileText },
   ];
 

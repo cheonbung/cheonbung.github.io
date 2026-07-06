@@ -41,7 +41,8 @@ export const DATA_KO: PortfolioData = {
     education: "학력",
     publications: "연구 논문",
     patents: "특허",
-    awards: "수상 및 활동",
+    awards: "수상",
+    overseasExperience: "해외경험",
     coursework: "수강 과목",
     contact: "연락처",
     languages: "언어",
@@ -53,7 +54,7 @@ export const DATA_KO: PortfolioData = {
     undergradCourses: "학부",
     designedBy: "Designed for academic presentation.",
     lastUpdated: "최종 업데이트",
-    lastUpdatedDate: "2026.04.15",
+    lastUpdatedDate: "2026.07.06",
     stats: {
       journals: "저널 논문",
       conferences: "학술대회",
@@ -199,6 +200,19 @@ export const DATA_KO: PortfolioData = {
       title: "한국전자거래학회 2022 추계학술대회 (우수논문상)",
       issuer: "한국전자거래학회",
       rank: "silver"
+    }
+  ],
+  overseasExperiences: [
+    {
+      period: "2026.09 ~ 2027.02",
+      title: "2026년도 영국 University of Oxford 글로벌 사이버보안 인재 양성 교육프로그램 파견교육 이수",
+      institution: "Kellogg College, University of Oxford",
+      courses: [
+        "Secure Systems Engineering and Design",
+        "People and Security",
+        "Communication Security",
+        "Group Projects"
+      ]
     }
   ],
   publications: [
@@ -435,10 +449,10 @@ export const DATA_KO: PortfolioData = {
       applicant: "중앙대학교 산학협력단"
     },
     {
-      date: "2024-04-11",
-      number: "10-2024-0048439",
+      date: "2024.04.11 (출원) / 2026.06.25 (등록)",
+      number: "10-2024-0048439 (출원) / 10-2984271 (등록)",
       type: "Domestic",
-      title: "통화 중 실시간으로 보이스피싱의 맥락을 인식하는 장치 및 동작 방법",
+      title: "통화 중 실시간으로 보이스피싱의 맥락을 인식하는 장치 및 동작 방법\n(APPARATUS AND METHOD FOR REAL-TIME RECOGNITION OF VOICE PHISHING CONTEXT DURING A CALL)",
       inventors: ["노병준", "김상민", "이병천", "정운영"],
       applicant: "순천향대학교 산학협력단"
     }
@@ -455,7 +469,8 @@ export const DATA_EN: PortfolioData = {
     education: "Education",
     publications: "Publications",
     patents: "Patents",
-    awards: "Awards & Activities",
+    awards: "Awards",
+    overseasExperience: "International Experience",
     coursework: "Coursework",
     contact: "Contact",
     languages: "Languages",
@@ -467,7 +482,7 @@ export const DATA_EN: PortfolioData = {
     undergradCourses: "Undergraduate",
     designedBy: "Designed for academic presentation.",
     lastUpdated: "Last Updated",
-    lastUpdatedDate: "2026.04.15",
+    lastUpdatedDate: "2026.07.06",
     stats: {
       journals: "Journals",
       conferences: "Conferences",
@@ -613,6 +628,19 @@ export const DATA_EN: PortfolioData = {
       title: "The Korea Society for Electronic Commerce Fall Conference 2022 (Best Paper Award)",
       issuer: "The Korea Society for Electronic Commerce",
       rank: "silver"
+    }
+  ],
+  overseasExperiences: [
+    {
+      period: "2026.09 ~ 2027.02",
+      title: "2026 University of Oxford Global Cybersecurity Talent Training Program Completion",
+      institution: "Kellogg College, University of Oxford",
+      courses: [
+        "Secure Systems Engineering and Design",
+        "People and Security",
+        "Communication Security",
+        "Group Projects"
+      ]
     }
   ],
   publications: [
@@ -849,10 +877,10 @@ export const DATA_EN: PortfolioData = {
       applicant: "Chung-Ang University Industry-Academic Cooperation Foundation"
     },
     {
-      date: "2024-04-11",
-      number: "10-2024-0048439",
+      date: "Apr 11, 2024 (Filing) / Jun 25, 2026 (Reg.)",
+      number: "10-2024-0048439 (Filing) / 10-2984271 (Reg.)",
       type: "Domestic",
-      title: "Apparatus and method for real-time recognition of voice phishing context during a call",
+      title: "APPARATUS AND METHOD FOR REAL-TIME RECOGNITION OF VOICE PHISHING CONTEXT DURING A CALL",
       inventors: ["Byeongjun Noh", "Sangmin Kim", "Byeongcheon Lee", "Woonyoung Jeong"],
       applicant: "Soonchunhyang University Industry-Academic Cooperation Foundation"
     }

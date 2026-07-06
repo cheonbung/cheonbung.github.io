@@ -77,6 +77,13 @@ export interface Award {
   rank?: string;
 }
 
+export interface OverseasExperience {
+  period: string;
+  title: string;
+  institution: string;
+  courses: string[];
+}
+
 export interface Profile {
   name: string;
   role?: string;
@@ -100,6 +107,7 @@ export interface UIStrings {
   publications: string;
   patents: string;
   awards: string;
+  overseasExperience: string;
   coursework: string;
   contact: string;
   languages: string;
@@ -131,4 +139,5 @@ export interface PortfolioData {
   conferences: Publication[];
   patents: Patent[];
   awards: Award[];
+  overseasExperiences: OverseasExperience[];
 }

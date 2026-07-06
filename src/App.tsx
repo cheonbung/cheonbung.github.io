@@ -6,7 +6,7 @@ import { Language } from './types';
 import {
   Mail, ExternalLink, Calendar, CheckCircle,
   Award as AwardIcon, Book, BookOpen, Building2, Github, Linkedin, ScrollText, ArrowUpRight, Quote,
-  User, GraduationCap, FileText
+  User, GraduationCap, FileText, Globe
 } from 'lucide-react';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
   const activeCourseSection = courseworkTab === 'grad' ? data.gradCourses : data.undergradCourses;
 
   useEffect(() => {
-    const sections = ['about', 'education', 'publications', 'patents', 'awards', 'coursework'];
+    const sections = ['about', 'education', 'publications', 'patents', 'awards', 'overseas', 'coursework'];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -364,6 +364,40 @@ function App() {
               </li>
             ))}
           </ul>
+        </Section>
+
+        {/* Overseas Experience Section */}
+        <Section id="overseas" title={data.ui.overseasExperience} icon={Globe}>
+          <div className="grid gap-4">
+            {data.overseasExperiences.map((experience, idx) => (
+              <div key={idx} className="p-5 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-300">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-3 mb-3">
+                  <h4 className="font-bold text-slate-900 text-lg leading-snug">{experience.title}</h4>
+                  <span className="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-full bg-blue-50 text-blue-700">
+                    <Calendar size={13} />
+                    {experience.period}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2 text-sm text-slate-600 font-medium mb-4">
+                  <Building2 size={16} className="text-blue-600 shrink-0" />
+                  <span>{experience.institution}</span>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100">
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">{data.ui.coursework}</p>
+                  <ul className="grid gap-2 sm:grid-cols-2">
+                    {experience.courses.map((course, courseIdx) => (
+                      <li key={courseIdx} className="flex items-start gap-2 text-sm text-slate-700 leading-relaxed">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
+                        <span>{course}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
         </Section>
 
         {/* Coursework Section */}
