@@ -420,7 +420,7 @@ function App() {
           </div>
 
           <div className="overflow-x-auto rounded-lg border border-slate-200">
-            <table className="w-full text-sm text-left">
+            <table className="w-full min-w-[640px] text-sm text-left">
               <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
                 <tr>
                   <th className="px-6 py-3 font-semibold">{activeCourseSection.headers.period}</th>
