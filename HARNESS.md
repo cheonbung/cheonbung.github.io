@@ -12,7 +12,9 @@ main 브랜치          →  소스 코드 (React/TS)
 gh-pages 브랜치      →  빌드 결과물 → GitHub Pages가 서빙
 ```
 
-`npm run deploy` 한 번으로 빌드 + gh-pages 브랜치 업데이트가 함께 된다.
+**`main`에 push하면 GitHub Actions가 자동으로 빌드해서 gh-pages에 배포한다**
+(`.github/workflows/deploy.yml`). 수동 배포(`npm run deploy`)는 Actions가
+실패했을 때의 폴백이다.
 
 ### 전체 작업 흐름
 
@@ -21,13 +23,13 @@ gh-pages 브랜치      →  빌드 결과물 → GitHub Pages가 서빙
     ↓
 node scripts/validate.js      # 검증 (빌드 성공 + KO/EN 일치 확인)
     ↓
-git add / commit / push       # 소스 코드 저장
+git add / commit / push       # push하면 Actions가 자동 배포
     ↓
-npm run deploy                # 빌드 + gh-pages 배포 ← 반드시 실행
+GitHub Actions 성공 확인      # 저장소 → Actions 탭 (1~2분 소요)
 ```
 
-> **자주 하는 실수**: `git push`만 하고 `npm run deploy`를 빠뜨리면  
-> GitHub에는 소스가 올라가지만 **사이트는 그대로다**.
+> 과거에는 `npm run deploy`를 수동 실행해야 했고, 이를 빠뜨려 사이트가
+> 미반영되는 사고가 있었다(2026.07.11). 지금은 push만 하면 자동 배포된다.
 
 ---
 
@@ -83,10 +85,10 @@ Claude는 매 대화 시작 시 `CLAUDE.md`를 읽고 컨텍스트를 파악한�
 
 ### Claude에게 기대하는 행동
 
-1. `src/constants.tsx`의 KO/EN 두 곳 모두 수정
+1. `src/constants.tsx`의 KO/EN 두 곳 모두 수정 (+ `lastUpdatedDate` 갱신)
 2. `node scripts/validate.js` 실행으로 검증
-3. `git commit` + `git push origin main`
-4. `npm run deploy` 실행 → 사이트 배포
+3. `git commit` + `git push origin main` → Actions가 자동 배포
+4. Actions 실행 성공 확인 (실패 시 `npm run deploy` 폴백)
 
 ---
 
@@ -113,6 +115,8 @@ node scripts/validate.js
 cheonbung.github.io/
 ├── CLAUDE.md              # Claude 컨텍스트 (매 대화마다 읽힘)
 ├── HARNESS.md             # 이 문서 (사람이 읽는 운영 가이드)
+├── .github/workflows/
+│   └── deploy.yml         # push 시 자동 배포 (Actions)
 ├── scripts/
 │   └── validate.js        # 코드 수정 후 실행하는 검증기
 ├── src/
@@ -123,7 +127,10 @@ cheonbung.github.io/
 │       ├── Sidebar.tsx    # 프로필 사이드바
 │       └── Section.tsx    # 섹션 렌더러
 ├── public/
+│   ├── favicon.svg        # 파비콘
+│   ├── robots.txt         # 검색엔진 크롤링 설정
+│   ├── sitemap.xml        # 사이트맵
 │   └── images/
 │       └── profile.jpg    # 프로필 사진
-└── package.json           # scripts.deploy = "gh-pages -d dist"
+└── package.json           # scripts.deploy = 수동 배포 폴백
 ```

@@ -15,30 +15,28 @@ Claude가 이 프로젝트에서 작업할 때 매 세션마다 읽는 지침 �
 |------|------|
 | `npm run dev` | 로컬 개발 서버 |
 | `npm run build` | 프로덕션 빌드 (`dist/`) |
-| `node scripts/validate.js` | 빌드 + 데이터 검증 (배포 전 필수) |
-| `npm run deploy` | 빌드 + `gh-pages` 브랜치 배포 |
+| `npx tsc --noEmit` | 타입 검사 (strict 모드) |
+| `node scripts/validate.js` | 빌드 + KO/EN 개수·rank·date 검증 (push 전 필수) |
+| `npm run deploy` | 수동 배포 (Actions 실패 시 폴백) |
 
-> `validate.js`의 KO/EN 개수 검증은 현재 `awards`만 정확하다.
-> `publications`/`conferences`/`patents`는 중첩 배열 때문에 파싱이 되지 않으므로
-> **눈으로 KO/EN 항목 수를 직접 대조**할 것.
-
-## 배포 방식 (가장 중요)
-
-> **`git push`만 하면 사이트가 업데이트되지 않는다.**
+## 배포 방식
 
 | 브랜치 | 역할 |
 |--------|------|
 | `main` | 소스 코드 (`dist/`는 gitignore) |
 | `gh-pages` | 빌드 결과물 — GitHub Pages가 이 브랜치를 서빙 |
 
-콘텐츠·코드 수정 후 반드시 이 순서를 지킨다:
+**`main`에 push하면 GitHub Actions(`.github/workflows/deploy.yml`)가
+자동으로 빌드해서 `gh-pages`에 배포한다.** 별도 수동 배포는 필요 없다.
 
 ```bash
 node scripts/validate.js        # 1. 검증
 git add <파일> && git commit    # 2. 소스 커밋
-git push origin main            # 3. 소스 push
-npm run deploy                  # 4. 사이트 배포 ← 빠뜨리면 사이트 미반영
+git push origin main            # 3. push → Actions가 자동 배포
 ```
+
+push 후 Actions 실행이 성공했는지 확인한다
+(실패 시 `npm run deploy`로 수동 배포 가능).
 
 ## 파일 구조
 
@@ -49,7 +47,8 @@ npm run deploy                  # 4. 사이트 배포 ← 빠뜨리면 사이트
 | `src/App.tsx` | 메인 앱 (모든 섹션 렌더링) |
 | `src/components/Sidebar.tsx` | 좌측 내비게이션 사이드바 |
 | `src/components/Section.tsx` | 섹션 래퍼 컴포넌트 |
-| `scripts/validate.js` | 배포 전 검증 스크립트 |
+| `scripts/validate.js` | push 전 검증 스크립트 |
+| `.github/workflows/deploy.yml` | push 시 자동 배포 워크플로우 |
 | `HARNESS.md` | 사람이 읽는 운영 가이드 |
 
 ## 코드 스타일
@@ -102,7 +101,9 @@ npm run deploy                  # 4. 사이트 배포 ← 빠뜨리면 사이트
 - `DATA_KO`/`DATA_EN` 중 한쪽만 수정하지 않는다
 - `vite.config.ts`의 `base: '/'`를 변경하지 않는다 (user site는 루트 경로)
 - `public/images/profile.jpg`를 임의로 교체·삭제하지 않는다
-- 검증(`node scripts/validate.js`) 없이 배포하지 않는다
+- 검증(`node scripts/validate.js`) 없이 push하지 않는다 — **push가 곧 배포다**
+- Tailwind CDN(`cdn.tailwindcss.com`)을 다시 추가하지 않는다 (PostCSS로 빌드함)
+- 개인정보(생년월일, 전화번호 등)를 데이터 파일에 넣지 않는다 (번들에 노출됨)
 - 사용자 확인 없이 콘텐츠(경력·논문 사실관계)를 임의로 창작하지 않는다
 
 ## 명명 규칙
@@ -116,4 +117,17 @@ npm run deploy                  # 4. 사이트 배포 ← 빠뜨리면 사이트
 - **2026.04.15** — 수상 이력을 추가하면서 `lastUpdatedDate`를 갱신하지 않아
   사이트에 잘못된 날짜가 표시됨.
 - **2026.07.11** — 연구실명 변경을 `git push`까지만 하고 `npm run deploy`를
-  빠뜨려, 라이브 사이트가 5일 전 상태로 방치됨. **push 후 deploy는 한 세트다.**
+  빠뜨려, 라이브 사이트가 5일 전 상태로 방치됨.
+  → 재발 방지를 위해 2026.07.12에 GitHub Actions 자동 배포를 도입함.
+
+## 향후 아이디어 (사용자 승인 후 진행)
+
+- **대표 연구/프로젝트 하이라이트 섹션** — 논문 목록과 별도로, 대표 연구
+  2~3개를 이미지·요약과 함께 소개하는 섹션 (2026.07.12 사용자가 추후 진행 결정)
+- **Google Scholar·ORCID 링크** — 프로필 개설 후 프로필 카드와
+  `index.html`의 JSON-LD `sameAs`에 추가 (아직 계정 없음)
+- **CV PDF 다운로드 버튼** — CV 파일이 준비되면 `ui`에 문자열 복원 후 추가
+- **KO/EN 데이터 구조 분리** — 날짜·저자·번호 같은 언어 무관 데이터를 공통
+  객체로 분리해 중복·불일치 위험 제거 (대규모 리팩토링이므로 별도 진행)
+- **og:image 전용 이미지 제작** — 현재 세로형 프로필 사진 대신 1200×630
+  가로형 이미지

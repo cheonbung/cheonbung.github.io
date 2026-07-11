@@ -5,7 +5,7 @@ import { DATA_KO, DATA_EN } from './constants';
 import { Language } from './types';
 import {
   Mail, ExternalLink, Calendar, CheckCircle,
-  Award as AwardIcon, Book, BookOpen, Building2, Github, Linkedin, ScrollText, ArrowUpRight, Quote,
+  Award as AwardIcon, Book, BookOpen, Building2, Github, ScrollText, ArrowUpRight, Quote,
   User, GraduationCap, FileText, Globe
 } from 'lucide-react';
 
@@ -17,6 +17,16 @@ function App() {
 
   const data = language === 'KO' ? DATA_KO : DATA_EN;
   const activeCourseSection = courseworkTab === 'grad' ? data.gradCourses : data.undergradCourses;
+
+  useEffect(() => {
+    document.documentElement.lang = language === 'KO' ? 'ko' : 'en';
+    document.title = data.ui.siteTitle;
+  }, [language, data.ui.siteTitle]);
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) document.getElementById(hash)?.scrollIntoView();
+  }, []);
 
   useEffect(() => {
     const sections = ['about', 'education', 'publications', 'patents', 'awards', 'overseas', 'coursework'];
@@ -82,7 +92,7 @@ function App() {
         setLanguage={setLanguage}
       />
 
-      <main className="flex-1 lg:ml-64 p-4 lg:p-12 pt-20 lg:pt-12 transition-all duration-300 max-w-5xl mx-auto w-full">
+      <main className="flex-1 lg:ml-64 p-4 lg:p-12 pt-20 lg:pt-12 print:ml-0 print:pt-4 transition-all duration-300 max-w-5xl mx-auto w-full">
 
         {/* Profile Section */}
         <Section id="about" title={data.ui.about} icon={User}>
@@ -92,6 +102,8 @@ function App() {
                 <img
                   src={data.profile.imagePath}
                   alt={data.profile.name}
+                  width={192}
+                  height={256}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -153,7 +165,7 @@ function App() {
                     <Mail size={18} />
                   </div>
                   <div className="flex flex-col min-w-0">
-                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Email</span>
+                    <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{data.ui.emailLabel}</span>
                     <a href={`mailto:${data.profile.email}`} className="text-sm font-bold text-slate-700 hover:text-blue-600 truncate">{data.profile.email}</a>
                   </div>
                 </div>
@@ -164,9 +176,9 @@ function App() {
                       <Github size={18} />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">GitHub</span>
+                      <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">GitHub</span>
                       <a href={data.profile.github} target="_blank" rel="noreferrer" className="text-sm font-bold text-slate-700 hover:text-blue-600 flex items-center gap-1">
-                        Visit Profile <ArrowUpRight size={12} />
+                        {data.ui.visitProfile} <ArrowUpRight size={12} />
                       </a>
                     </div>
                   </div>
@@ -177,7 +189,7 @@ function App() {
                     <CheckCircle size={18} />
                   </div>
                   <div className="flex flex-col w-full">
-                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Languages & Certifications</span>
+                    <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-2">{data.ui.languages} & {data.ui.certifications}</span>
                     <div className="flex flex-wrap gap-2">
                       {data.languages.map((lang, idx) => (
                         <span key={idx} className="px-2.5 py-1 bg-slate-50 text-slate-700 rounded-md text-xs font-semibold border border-slate-200">
@@ -252,7 +264,7 @@ function App() {
                     </p>
                     <div className="flex justify-between items-center text-xs md:text-sm">
                       <span className="font-semibold text-blue-700 italic">{pub.journalOrConference}</span>
-                      <span className="text-slate-400 font-mono">{pub.date}</span>
+                      <span className="text-slate-500 font-mono">{pub.date}</span>
                     </div>
                   </div>
                 ))}
@@ -286,7 +298,7 @@ function App() {
                             <AwardIcon size={12} /> {conf.note}
                           </span>
                         )}
-                        <span className="text-slate-400 font-mono">{conf.date}</span>
+                        <span className="text-slate-500 font-mono">{conf.date}</span>
                       </div>
                     </div>
                   </div>
@@ -316,15 +328,15 @@ function App() {
                   {/* Patent Metadata Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6 text-xs text-slate-500 pt-2 border-t border-slate-50">
                     <div className="flex flex-col gap-1">
-                      <span className="font-bold text-slate-400 uppercase tracking-tighter">Number</span>
+                      <span className="font-bold text-slate-500 uppercase tracking-tighter">Number</span>
                       <span className="text-slate-700 font-medium bg-slate-50 px-2 py-1 rounded">{patent.number}</span>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="font-bold text-slate-400 uppercase tracking-tighter">Date</span>
+                      <span className="font-bold text-slate-500 uppercase tracking-tighter">Date</span>
                       <span className="text-slate-700 font-medium bg-slate-50 px-2 py-1 rounded">{patent.date}</span>
                     </div>
                     <div className="flex flex-col gap-1 sm:col-span-2">
-                      <span className="font-bold text-slate-400 uppercase tracking-tighter">Applicant</span>
+                      <span className="font-bold text-slate-500 uppercase tracking-tighter">Applicant</span>
                       <span className="text-slate-700 font-medium bg-slate-50 px-2 py-1 rounded">{patent.applicant}</span>
                     </div>
                   </div>
@@ -351,7 +363,7 @@ function App() {
                         award.rank === 'silver' ? 'bg-slate-100 text-slate-600' :
                         'bg-orange-100 text-orange-700'
                       }`}>
-                        {award.rank}
+                        {data.ui.rankLabels[award.rank]}
                       </span>
                     )}
                   </div>
@@ -385,7 +397,7 @@ function App() {
                 </div>
 
                 <div className="pt-3 border-t border-slate-100">
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">{data.ui.coursework}</p>
+                  <p className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">{data.ui.coursework}</p>
                   <ul className="grid gap-2 sm:grid-cols-2">
                     {experience.courses.map((course, courseIdx) => (
                       <li key={courseIdx} className="flex items-start gap-2 text-sm text-slate-700 leading-relaxed">
@@ -421,12 +433,13 @@ function App() {
 
           <div className="overflow-x-auto rounded-lg border border-slate-200">
             <table className="w-full min-w-[640px] text-sm text-left">
+              <caption className="sr-only">{activeCourseSection.title}</caption>
               <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
                 <tr>
-                  <th className="px-6 py-3 font-semibold">{activeCourseSection.headers.period}</th>
-                  <th className="px-6 py-3 font-semibold">{activeCourseSection.headers.name}</th>
-                  <th className="px-6 py-3 font-semibold text-center">{activeCourseSection.headers.credits}</th>
-                  <th className="px-6 py-3 font-semibold text-right">{activeCourseSection.headers.grade}</th>
+                  <th scope="col" className="px-6 py-3 font-semibold">{activeCourseSection.headers.period}</th>
+                  <th scope="col" className="px-6 py-3 font-semibold">{activeCourseSection.headers.name}</th>
+                  <th scope="col" className="px-6 py-3 font-semibold text-center">{activeCourseSection.headers.credits}</th>
+                  <th scope="col" className="px-6 py-3 font-semibold text-right">{activeCourseSection.headers.grade}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 bg-white">

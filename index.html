@@ -17,21 +17,49 @@
 
   <meta name="author" content="Byeongcheon Lee" />
 
-  <!-- [수정됨] Open Graph URL -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://cheonbung.github.io/" />
   <meta property="og:title" content="이병천 (Byeongcheon Lee) - Researcher Portfolio" />
   <meta property="og:description"
     content="AI & Convergence Security Researcher. Check out my publications and projects." />
   <meta property="og:image" content="https://cheonbung.github.io/images/profile.jpg" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary" />
 
-  <!-- [수정됨] Canonical URL -->
+  <!-- Canonical URL -->
   <link rel="canonical" href="https://cheonbung.github.io/" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+
+  <!-- 구조화 데이터 (연구자 프로필) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Byeongcheon Lee",
+    "alternateName": "이병천",
+    "url": "https://cheonbung.github.io/",
+    "image": "https://cheonbung.github.io/images/profile.jpg",
+    "jobTitle": "Ph.D. Student",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "Chung-Ang University"
+    },
+    "sameAs": [
+      "https://github.com/cheonbung"
+    ]
+  }
+  </script>
+
+  <style>
     body {
       font-family: 'Inter', 'Noto Sans KR', sans-serif;
     }

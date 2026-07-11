@@ -37,6 +37,7 @@ const COMMON_INTERESTS = [
 
 export const DATA_KO: PortfolioData = {
   ui: {
+    siteTitle: "이병천 (Byeongcheon Lee) - AI & Security Researcher Portfolio",
     about: "프로필",
     education: "학력",
     publications: "연구 논문",
@@ -44,17 +45,19 @@ export const DATA_KO: PortfolioData = {
     awards: "수상",
     overseasExperience: "해외연수",
     coursework: "수강 과목",
-    contact: "연락처",
     languages: "언어",
     certifications: "자격증",
-    downloadResume: "이력서 다운로드",
     journalPapers: "저널 논문 (SCIE/SSCI/국내)",
     confPresentations: "학술대회 발표",
     gradCourses: "대학원",
     undergradCourses: "학부",
     designedBy: "Designed for academic presentation.",
     lastUpdated: "최종 업데이트",
-    lastUpdatedDate: "2026.07.11",
+    lastUpdatedDate: "2026.07.12",
+    menu: "메뉴",
+    emailLabel: "이메일",
+    visitProfile: "프로필 방문",
+    rankLabels: { gold: "최우수", silver: "우수", bronze: "장려" },
     stats: {
       journals: "저널 논문",
       conferences: "학술대회",
@@ -67,13 +70,9 @@ export const DATA_KO: PortfolioData = {
     affiliation: "중앙대학교 융합보안학과",
     lab: "PURE(Privacy, Unlearning, and Robust Engineering Lab)",
     labUrl: "https://cau-purelab.github.io/",
-    birthDate: "1999.02.08",
     email: "qudcjs0208@cau.ac.kr",
-    website: "-",
-    phone: "-",
     imagePath: "/images/profile.jpg",
     github: "https://github.com/cheonbung",
-    linkedin: "-",
     interests: COMMON_INTERESTS,
     bio: (
       <>
@@ -208,7 +207,7 @@ export const DATA_KO: PortfolioData = {
   overseasExperiences: [
     {
       period: "2026.09 ~ 2027.02",
-      title: "2026년도 영국 University of Oxford 글로벌 사이버보안 인재 양성 교육프로그램 파견교육 이수",
+      title: "2026년도 영국 University of Oxford 글로벌 사이버보안 인재 양성 교육프로그램 파견교육 예정",
       institution: "Kellogg College, University of Oxford",
       courses: [
         "Secure Systems Engineering and Design",
@@ -297,14 +296,14 @@ export const DATA_KO: PortfolioData = {
       date: "2025.08",
       type: "International Conference",
       title: "Machine Unlearning via Distillation into Soft Decision Tree",
-      authors: ["Sangmin Kim", "Byeongcheon Lee", "Sungwoo Park", "Seungmin Rho", "Mi Young Lee"],
+      authors: ["Sangmin Kim", "Byeongcheon Lee", "Sungwoo Park", "Seungmin Rho", "Miyoung Lee"],
       journalOrConference: "2025 International Conference on Platform Technology and Service (PlatCon-25)"
     },
     {
       date: "2025.08",
       type: "International Conference",
       title: "Selective Forgetting in ACGANs via Discriminator-Guided Unlearning",
-      authors: ["Byeongcheon Lee", "Sangmin Kim", "Sungwoo Park", "Seungmin Rho", "Mi Young Lee"],
+      authors: ["Byeongcheon Lee", "Sangmin Kim", "Sungwoo Park", "Seungmin Rho", "Miyoung Lee"],
       journalOrConference: "2025 International Conference on Platform Technology and Service (PlatCon-25)"
     },
     {
@@ -412,7 +411,7 @@ export const DATA_KO: PortfolioData = {
   ],
   patents: [
     {
-      date: "2025-09-17",
+      date: "2025.09.17",
       number: "10-2025-0133282",
       type: "Domestic",
       title: "판별기 기반 조건부 생성적 적대 신경망에서의 선택적 데이터 망각 방법 및 시스템\n(Method for selective data forgetting in discriminator-based conditional generative adversarial networks)",
@@ -420,7 +419,7 @@ export const DATA_KO: PortfolioData = {
       applicant: "중앙대학교 산학협력단"
     },
     {
-      date: "2025-08-08",
+      date: "2025.08.08",
       number: "10-2025-0109528",
       type: "Domestic",
       title: "선택적 지식 증류를 이용한 소프트 의사결정 트리 기반 머신 언러닝 방법, 이를 수행하는 장치 및 컴퓨터 프로그램\n(Machine unlearning method based on soft decision tree using selective knowledge distillation, apparatus and computer program for performing the method)",
@@ -428,7 +427,7 @@ export const DATA_KO: PortfolioData = {
       applicant: "중앙대학교 산학협력단"
     },
     {
-      date: "2025-04-10",
+      date: "2025.04.10",
       number: "PCT/KR2025/004854",
       type: "PCT",
       title: "통화 중 실시간으로 보이스피싱의 맥락을 인식하는 장치 및 동작 방법\n(APPARATUS AND METHOD FOR REAL-TIME RECOGNITION OF VOICE PHISHING CONTEXT DURING A CALL)",
@@ -436,7 +435,7 @@ export const DATA_KO: PortfolioData = {
       applicant: "순천향대학교 산학협력단"
     },
     {
-      date: "2024-11-14",
+      date: "2024.11.14",
       number: "10-2024-0161756",
       type: "Domestic",
       title: "다변수 산업 사물 단말 관련 시계열 데이터에서 딥 러닝 모델을 기초로 한, 이상 탐지 방법 그 장치\n(METHOD FOR ANOMALY DETECTING BASED ON DEEP LEARNING MODEL IN TIME SERIES DATA RELATED TO MULTIVARIATE INDUSTRIAL THINGS TERMINALS, AND APPARATUS THEREOF)",
@@ -468,6 +467,7 @@ export const DATA_KO: PortfolioData = {
 
 export const DATA_EN: PortfolioData = {
   ui: {
+    siteTitle: "Byeongcheon Lee - AI & Security Researcher Portfolio",
     about: "Profile",
     education: "Education",
     publications: "Publications",
@@ -475,17 +475,19 @@ export const DATA_EN: PortfolioData = {
     awards: "Awards",
     overseasExperience: "Overseas Training",
     coursework: "Coursework",
-    contact: "Contact",
     languages: "Languages",
     certifications: "Certifications",
-    downloadResume: "Download CV",
     journalPapers: "Journal Papers (SCIE/SSCI/Domestic)",
     confPresentations: "Conference Presentations",
     gradCourses: "Graduate",
     undergradCourses: "Undergraduate",
     designedBy: "Designed for academic presentation.",
     lastUpdated: "Last Updated",
-    lastUpdatedDate: "2026.07.11",
+    lastUpdatedDate: "2026.07.12",
+    menu: "Menu",
+    emailLabel: "Email",
+    visitProfile: "Visit Profile",
+    rankLabels: { gold: "Gold", silver: "Silver", bronze: "Bronze" },
     stats: {
       journals: "Journals",
       conferences: "Conferences",
@@ -498,13 +500,9 @@ export const DATA_EN: PortfolioData = {
     affiliation: "Dept. of Convergence Security, Chung-Ang Univ.",
     lab: "PURE(Privacy, Unlearning, and Robust Engineering Lab)",
     labUrl: "https://cau-purelab.github.io/",
-    birthDate: "1999.02.08",
     email: "qudcjs0208@cau.ac.kr",
-    website: "-",
-    phone: "-",
     imagePath: "/images/profile.jpg",
     github: "https://github.com/cheonbung",
-    linkedin: "-",
     interests: COMMON_INTERESTS,
     bio: (
       <>
@@ -538,7 +536,7 @@ export const DATA_EN: PortfolioData = {
       degree: "Bachelor's Degree",
       school: "Soonchunhyang University",
       major: "Dept. of AI & Big Data",
-      status: "Graduation",
+      status: "Graduated",
       advisor: "Jihoon Moon",
       advisorLabel: "Advisor"
     },
@@ -547,7 +545,7 @@ export const DATA_EN: PortfolioData = {
       degree: "High School",
       school: "Anseong High School",
       major: "-",
-      status: "Graduation",
+      status: "Graduated",
       advisor: "-"
     }
   ],
@@ -639,7 +637,7 @@ export const DATA_EN: PortfolioData = {
   overseasExperiences: [
     {
       period: "2026.09 ~ 2027.02",
-      title: "2026 University of Oxford Global Cybersecurity Talent Training Program Completion",
+      title: "2026 University of Oxford Global Cybersecurity Talent Training Program (Scheduled)",
       institution: "Kellogg College, University of Oxford",
       courses: [
         "Secure Systems Engineering and Design",
@@ -728,14 +726,14 @@ export const DATA_EN: PortfolioData = {
       date: "2025.08",
       type: "International Conference",
       title: "Machine Unlearning via Distillation into Soft Decision Tree",
-      authors: ["Sangmin Kim", "Byeongcheon Lee", "Sungwoo Park", "Seungmin Rho", "Mi Young Lee"],
+      authors: ["Sangmin Kim", "Byeongcheon Lee", "Sungwoo Park", "Seungmin Rho", "Miyoung Lee"],
       journalOrConference: "2025 International Conference on Platform Technology and Service (PlatCon-25)"
     },
     {
       date: "2025.08",
       type: "International Conference",
       title: "Selective Forgetting in ACGANs via Discriminator-Guided Unlearning",
-      authors: ["Byeongcheon Lee", "Sangmin Kim", "Sungwoo Park", "Seungmin Rho", "Mi Young Lee"],
+      authors: ["Byeongcheon Lee", "Sangmin Kim", "Sungwoo Park", "Seungmin Rho", "Miyoung Lee"],
       journalOrConference: "2025 International Conference on Platform Technology and Service (PlatCon-25)"
     },
     {
@@ -843,7 +841,7 @@ export const DATA_EN: PortfolioData = {
   ],
   patents: [
     {
-      date: "2025-09-17",
+      date: "2025.09.17",
       number: "10-2025-0133282",
       type: "Domestic",
       title: "Method for selective data forgetting in discriminator-based conditional generative adversarial networks",
@@ -851,7 +849,7 @@ export const DATA_EN: PortfolioData = {
       applicant: "Chung-Ang University Industry-Academic Cooperation Foundation"
     },
     {
-      date: "2025-08-08",
+      date: "2025.08.08",
       number: "10-2025-0109528",
       type: "Domestic",
       title: "Machine unlearning method based on soft decision tree using selective knowledge distillation, apparatus and computer program for performing the method",
@@ -859,7 +857,7 @@ export const DATA_EN: PortfolioData = {
       applicant: "Chung-Ang University Industry-Academic Cooperation Foundation"
     },
     {
-      date: "2025-04-10",
+      date: "2025.04.10",
       number: "PCT/KR2025/004854",
       type: "PCT",
       title: "APPARATUS AND METHOD FOR REAL-TIME RECOGNITION OF VOICE PHISHING CONTEXT DURING A CALL",
@@ -867,7 +865,7 @@ export const DATA_EN: PortfolioData = {
       applicant: "Soonchunhyang University Industry-Academic Cooperation Foundation"
     },
     {
-      date: "2024-11-14",
+      date: "2024.11.14",
       number: "10-2024-0161756",
       type: "Domestic",
       title: "METHOD FOR ANOMALY DETECTING BASED ON DEEP LEARNING MODEL IN TIME SERIES DATA RELATED TO MULTIVARIATE INDUSTRIAL THINGS TERMINALS, AND APPARATUS THEREOF",
@@ -875,7 +873,7 @@ export const DATA_EN: PortfolioData = {
       applicant: "Chung-Ang University Industry-Academic Cooperation Foundation"
     },
     {
-      date: "Nov 14, 2024 (Filing) / Feb 27, 2026 (Reg.)",
+      date: "2024.11.14 (Filing) / 2026.02.27 (Reg.)",
       number: "10-2024-0161744 (Filing) / 10-2934580 (Reg.)",
       type: "Domestic",
       title: "METHOD FOR DETECTING ONLINE GROOMING CRIMES USING DEEP LEARNING-BASED NATURAL LANGUAGE PROCESSING MODELS, AND APPARATUS THEREOF",
@@ -883,7 +881,7 @@ export const DATA_EN: PortfolioData = {
       applicant: "Chung-Ang University Industry-Academic Cooperation Foundation"
     },
     {
-      date: "Apr 11, 2024 (Filing) / Jun 25, 2026 (Reg.)",
+      date: "2024.04.11 (Filing) / 2026.06.25 (Reg.)",
       number: "10-2024-0048439 (Filing) / 10-2984271 (Reg.)",
       type: "Domestic",
       title: "APPARATUS AND METHOD FOR REAL-TIME RECOGNITION OF VOICE PHISHING CONTEXT DURING A CALL",

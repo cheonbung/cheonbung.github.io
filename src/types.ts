@@ -2,11 +2,6 @@ import React from 'react';
 
 export type Language = 'KO' | 'EN';
 
-export interface BaseData {
-  period: string;
-  status: string;
-}
-
 export interface Education {
   period: string;
   degree: string;
@@ -50,7 +45,9 @@ export interface Certification {
   issuer: string;
 }
 
-export type PublicationType = 'SCIE' | 'SSCI' | 'Domestic' | 'International Conference' | 'Domestic Conference' | 'Patent' | 'PCT';
+export type PublicationType = 'SCIE' | 'SSCI' | 'Domestic' | 'International Conference' | 'Domestic Conference';
+
+export type AwardRank = 'gold' | 'silver' | 'bronze';
 
 export interface Publication {
   date: string;
@@ -74,7 +71,7 @@ export interface Award {
   date: string;
   title: string;
   issuer: string;
-  rank?: string;
+  rank?: AwardRank;
 }
 
 export interface OverseasExperience {
@@ -87,21 +84,18 @@ export interface OverseasExperience {
 export interface Profile {
   name: string;
   role?: string;
-  affiliation?: string; // [추가] 소속 (학과 등)
+  affiliation?: string; // 소속 (학과 등)
   lab?: string;         // 연구실 이름
   labUrl?: string;      // 연구실 링크
-  birthDate: string;
   email: string;
-  website: string;
-  phone: string;
   imagePath: string;
   github: string;
-  linkedin: string;
   interests: string[];
-  bio: React.ReactNode; // [수정] string -> React.ReactNode (줄바꿈/볼드 처리를 위해)
+  bio: React.ReactNode; // 줄바꿈/볼드 처리를 위해 ReactNode 사용
 }
 
 export interface UIStrings {
+  siteTitle: string;
   about: string;
   education: string;
   publications: string;
@@ -109,10 +103,8 @@ export interface UIStrings {
   awards: string;
   overseasExperience: string;
   coursework: string;
-  contact: string;
   languages: string;
   certifications: string;
-  downloadResume: string;
   journalPapers: string;
   confPresentations: string;
   gradCourses: string;
@@ -120,6 +112,10 @@ export interface UIStrings {
   designedBy: string;
   lastUpdated: string;
   lastUpdatedDate: string;
+  menu: string;
+  emailLabel: string;
+  visitProfile: string;
+  rankLabels: Record<AwardRank, string>;
   stats: {
     journals: string;
     conferences: string;

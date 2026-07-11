@@ -52,18 +52,32 @@ function checkBuild() {
 // ─────────────────────────────────────────────────
 // 2. KO/EN 항목 수 일치
 // ─────────────────────────────────────────────────
-function countItems(text, field) {
-  // field 키가 나오는 배열 블록을 순서대로 추출 (KO, EN 순)
-  const regex = new RegExp(`${field}:\\s*\\[([\\s\\S]*?)\\](?=\\s*[,}])`, "g");
-  const counts = [];
+function extractArrayBlocks(text, field) {
+  // field 키의 배열 블록을 대괄호 짝을 맞춰가며 추출 (KO, EN 순)
+  // 항목 안에 authors: [...] 같은 중첩 배열이 있어도 끝까지 읽는다
+  const blocks = [];
+  const regex = new RegExp(`${field}:\\s*\\[`, "g");
   let match;
   while ((match = regex.exec(text)) !== null) {
-    const block = match[1];
+    const start = match.index + match[0].length;
+    let depth = 1;
+    let i = start;
+    while (i < text.length && depth > 0) {
+      if (text[i] === "[") depth++;
+      else if (text[i] === "]") depth--;
+      i++;
+    }
+    blocks.push(text.slice(start, i - 1));
+  }
+  return blocks;
+}
+
+function countItems(text, field) {
+  return extractArrayBlocks(text, field).map((block) => {
     const byDate = (block.match(/date:\s*"/g) || []).length;
     const byName = (block.match(/name:\s*"/g) || []).length;
-    counts.push(byDate || byName);
-  }
-  return counts;
+    return byDate || byName;
+  });
 }
 
 function checkKoEnParity() {
@@ -73,6 +87,8 @@ function checkKoEnParity() {
   const fields = {
     awards: "수상 이력",
     patents: "특허",
+    publications: "저널 논문",
+    conferences: "학술대회 발표",
   };
 
   for (const [field, label] of Object.entries(fields)) {
@@ -88,20 +104,6 @@ function checkKoEnParity() {
     } else {
       console.log(`${FAIL} ${label}: KO=${ko}, EN=${en} 불일치 — 누락 항목 확인 필요`);
       errors.push(`${label} KO/EN 항목 수 불일치 (KO=${ko}, EN=${en})`);
-    }
-  }
-
-  // publications + conferences 합산 비교
-  const pubCounts = countItems(text, "publications");
-  const confCounts = countItems(text, "conferences");
-  if (pubCounts.length >= 2 && confCounts.length >= 2) {
-    const koTotal = pubCounts[0] + confCounts[0];
-    const enTotal = pubCounts[1] + confCounts[1];
-    if (koTotal === enTotal) {
-      console.log(`${PASS} 논문 합계: KO=${koTotal}, EN=${enTotal} 일치`);
-    } else {
-      console.log(`${FAIL} 논문 합계: KO=${koTotal}, EN=${enTotal} 불일치`);
-      errors.push(`논문 KO/EN 합계 불일치 (KO=${koTotal}, EN=${enTotal})`);
     }
   }
 }
@@ -136,8 +138,9 @@ function checkDateFormat() {
   const badDates = dates.filter(
     (d) =>
       !/^\d{4}\.\d{2}$/.test(d) &&
-      !/^\d{4}-\d{2}-\d{2}$/.test(d) &&
-      !/^\d{4}\.\d{2}\.\d{2}$/.test(d)
+      !/^\d{4}\.\d{2}\.\d{2}$/.test(d) &&
+      !/^\d{4}\.\d{2}\.\d{2} \(출원\) \/ \d{4}\.\d{2}\.\d{2} \(등록\)$/.test(d) &&
+      !/^\d{4}\.\d{2}\.\d{2} \(Filing\) \/ \d{4}\.\d{2}\.\d{2} \(Reg\.\)$/.test(d)
   );
 
   if (badDates.length === 0) {
@@ -163,7 +166,8 @@ function summary() {
 
   console.log(`\n${INFO} 배포 리마인더:`);
   console.log("    git add <파일> && git commit -m '...' && git push origin main");
-  console.log("    npm run deploy   ← 이 단계 없이는 사이트가 업데이트되지 않습니다!\n");
+  console.log("    → push하면 GitHub Actions가 자동으로 빌드·배포합니다.");
+  console.log("    → Actions 실패 시 수동 배포: npm run deploy\n");
 
   if (errors.length > 0) process.exit(1);
 }
