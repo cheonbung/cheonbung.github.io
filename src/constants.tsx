@@ -54,7 +54,7 @@ export const DATA_KO: PortfolioData = {
     undergradCourses: "학부",
     designedBy: "Designed for academic presentation.",
     lastUpdated: "최종 업데이트",
-    lastUpdatedDate: "2026.07.06",
+    lastUpdatedDate: "2026.07.11",
     stats: {
       journals: "저널 논문",
       conferences: "학술대회",
@@ -65,8 +65,8 @@ export const DATA_KO: PortfolioData = {
     name: "이병천",
     role: "박사 과정",
     affiliation: "중앙대학교 융합보안학과",
-    lab: "Security Visual Intelligence Lab (SVIL)",
-    labUrl: "https://security-visual-intelligence-lab-ho.vercel.app/",
+    lab: "PURE(Privacy, Unlearning, and Robust Engineering Lab)",
+    labUrl: "https://cau-purelab.github.io/",
     birthDate: "1999.02.08",
     email: "qudcjs0208@cau.ac.kr",
     website: "-",
@@ -77,7 +77,7 @@ export const DATA_KO: PortfolioData = {
     interests: COMMON_INTERESTS,
     bio: (
       <>
-        중앙대학교 융합보안학과 <strong className="text-slate-900 font-bold">Security Visual Intelligence Lab (SVIL)</strong>에서 노승민 교수님의 지도 아래 박사 과정을 밟고 있는 <strong className="text-slate-900 font-bold">이병천</strong>입니다.
+        중앙대학교 융합보안학과 <strong className="text-slate-900 font-bold">PURE(Privacy, Unlearning, and Robust Engineering Lab)</strong>에서 노승민 교수님의 지도 아래 박사 과정을 밟고 있는 <strong className="text-slate-900 font-bold">이병천</strong>입니다.
         <br /><br />
         신뢰할 수 있는 AI(Trustworthy AI) 실현을 목표로, <strong className="text-slate-900 font-bold">머신 언러닝(Machine Unlearning)</strong>과 <strong className="text-slate-900 font-bold">생성 모델 보안(Generative Model Security)</strong>, 그리고 <strong className="text-slate-900 font-bold">시계열 이상탐지(Time Series Anomaly Detection)</strong>를 중심으로 연구하고 있습니다. 다수의 SCIE 논문 게재 및 특허 출원·등록 경험을 바탕으로, AI 시스템의 안전성과 투명성을 높이는 실용적 솔루션 개발에 힘쓰고 있습니다.
       </>
@@ -485,7 +485,7 @@ export const DATA_EN: PortfolioData = {
     undergradCourses: "Undergraduate",
     designedBy: "Designed for academic presentation.",
     lastUpdated: "Last Updated",
-    lastUpdatedDate: "2026.07.06",
+    lastUpdatedDate: "2026.07.11",
     stats: {
       journals: "Journals",
       conferences: "Conferences",
@@ -496,8 +496,8 @@ export const DATA_EN: PortfolioData = {
     name: "Byeongcheon Lee",
     role: "Ph.D. Student",
     affiliation: "Dept. of Convergence Security, Chung-Ang Univ.",
-    lab: "Security Visual Intelligence Lab (SVIL)",
-    labUrl: "https://security-visual-intelligence-lab-ho.vercel.app/",
+    lab: "PURE(Privacy, Unlearning, and Robust Engineering Lab)",
+    labUrl: "https://cau-purelab.github.io/",
     birthDate: "1999.02.08",
     email: "qudcjs0208@cau.ac.kr",
     website: "-",
@@ -508,7 +508,7 @@ export const DATA_EN: PortfolioData = {
     interests: COMMON_INTERESTS,
     bio: (
       <>
-        I am <strong className="text-slate-900 font-bold">Byeongcheon Lee</strong>, a Ph.D. student at the <strong className="text-slate-900 font-bold">Security Visual Intelligence Lab (SVIL)</strong>, Chung-Ang University, advised by Prof. Seungmin Rho.
+        I am <strong className="text-slate-900 font-bold">Byeongcheon Lee</strong>, a Ph.D. student at the <strong className="text-slate-900 font-bold">PURE(Privacy, Unlearning, and Robust Engineering Lab)</strong>, Chung-Ang University, advised by Prof. Seungmin Rho.
         <br /><br />
         My research focuses on building <strong className="text-slate-900 font-bold">Trustworthy AI</strong> systems, with an emphasis on <strong className="text-slate-900 font-bold">Machine Unlearning</strong>, <strong className="text-slate-900 font-bold">Generative Model Security</strong>, and <strong className="text-slate-900 font-bold">Anomaly Detection</strong> in time series data. Grounded in multiple SCIE publications and patent filings, I work toward developing practical AI security solutions that are secure, reliable, and transparent.
       </>
