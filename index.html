@@ -16,6 +16,7 @@
     content="이병천, Byeongcheon Lee, 중앙대학교, PURE, 박사과정, Ph.D. Student, AI 보안, Machine Unlearning, Trustworthy AI, 기계 언러닝, 포트폴리오" />
 
   <meta name="author" content="Byeongcheon Lee" />
+  <meta name="theme-color" content="#f8fafc" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -88,6 +89,14 @@
     }
 
     @media print {
+
+      /* 다크 모드 상태에서 인쇄해도 CV는 항상 흰 배경 문서로 출력 */
+      :root,
+      :root.dark {
+        color-scheme: light;
+      }
+
+      html,
       body {
         background: #fff !important;
       }

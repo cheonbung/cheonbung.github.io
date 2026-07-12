@@ -43,6 +43,9 @@ function App() {
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    // 모바일 브라우저 주소창 색상도 테마에 맞춘다
+    document.querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', theme === 'dark' ? '#020617' : '#f8fafc');
     try {
       localStorage.setItem('theme', theme);
     } catch { /* 저장 실패는 무시 */ }
@@ -473,7 +476,13 @@ function App() {
             </button>
           </div>
 
-          <div className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+          {/* 좁은 화면에서 표가 가로 스크롤되므로 키보드 포커스로도 조작 가능해야 한다 */}
+          <div
+            className="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+            tabIndex={0}
+            role="region"
+            aria-label={activeCourseSection.title}
+          >
             <table className="w-full min-w-[640px] text-sm text-left">
               <caption className="sr-only">{activeCourseSection.title}</caption>
               <thead className="text-xs text-slate-500 dark:text-slate-400 uppercase bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
