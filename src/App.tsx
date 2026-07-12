@@ -96,7 +96,9 @@ function App() {
         setLanguage={setLanguage}
       />
 
-      <main className="flex-1 lg:ml-64 p-4 lg:p-12 pt-20 lg:pt-12 transition-all duration-300 max-w-5xl mx-auto w-full">
+      {/* 사이드바(고정 264px)를 제외한 영역 안에서 콘텐츠를 가운데 정렬 */}
+      <main className="flex-1 lg:ml-64 p-4 lg:p-12 pt-20 lg:pt-12 transition-all duration-300">
+        <div className="max-w-6xl mx-auto w-full">
 
         {/* Profile Section */}
         <Section id="about" title={data.ui.about} icon={User}>
@@ -251,7 +253,7 @@ function App() {
                 <Book size={22} className="text-blue-600" />
                 {data.ui.journalPapers}
               </h3>
-              <div className="grid gap-4">
+              <div className="grid gap-4 xl:grid-cols-2">
                 {data.publications.map((pub, idx) => (
                   <div key={idx} className="p-5 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-300">
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-3 mb-2">
@@ -280,7 +282,7 @@ function App() {
                 <Building2 size={22} className="text-blue-600" />
                 {data.ui.confPresentations}
               </h3>
-              <div className="grid gap-4">
+              <div className="grid gap-4 xl:grid-cols-2">
                 {data.conferences.map((conf, idx) => (
                   <div key={idx} className="p-5 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all duration-300">
                     <div className="flex flex-col sm:flex-row justify-between items-start gap-3 mb-2">
@@ -465,6 +467,7 @@ function App() {
           <p>{data.ui.designedBy}</p>
         </div>
 
+        </div>
       </main>
     </div>
     </>
