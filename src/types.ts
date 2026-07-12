@@ -115,6 +115,7 @@ export interface UIStrings {
   menu: string;
   emailLabel: string;
   visitProfile: string;
+  downloadResume: string;
   rankLabels: Record<AwardRank, string>;
   stats: {
     journals: string;

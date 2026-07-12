@@ -6,10 +6,10 @@
 //
 // 검증 항목:
 //   1. npm run build 성공 여부
-//   2. KO/EN 데이터 항목 수 일치 여부 (awards, publications, conferences, patents)
+//   2. 각 데이터 항목에 ko/en 오버레이가 모두 작성됐는지 확인
 //   3. award rank 값 유효성 (gold / silver / bronze)
 //   4. date 포맷 일관성 (YYYY.MM)
-//   5. 배포 리마인더 출력 (npm run deploy)
+//   5. 배포 리마인더 출력
 
 import { execSync } from "child_process";
 import { readFileSync } from "fs";
@@ -52,58 +52,49 @@ function checkBuild() {
 // ─────────────────────────────────────────────────
 // 2. KO/EN 항목 수 일치
 // ─────────────────────────────────────────────────
-function extractArrayBlocks(text, field) {
-  // field 키의 배열 블록을 대괄호 짝을 맞춰가며 추출 (KO, EN 순)
-  // 항목 안에 authors: [...] 같은 중첩 배열이 있어도 끝까지 읽는다
-  const blocks = [];
-  const regex = new RegExp(`${field}:\\s*\\[`, "g");
-  let match;
-  while ((match = regex.exec(text)) !== null) {
-    const start = match.index + match[0].length;
-    let depth = 1;
-    let i = start;
-    while (i < text.length && depth > 0) {
-      if (text[i] === "[") depth++;
-      else if (text[i] === "]") depth--;
-      i++;
-    }
-    blocks.push(text.slice(start, i - 1));
+function extractArrayBlock(text, constName) {
+  // `const 이름 ... = [` 형태의 배열 블록을 대괄호 짝을 맞춰가며 추출
+  const regex = new RegExp(`const\\s+${constName}[^=]*=\\s*\\[`);
+  const match = regex.exec(text);
+  if (!match) return null;
+  const start = match.index + match[0].length;
+  let depth = 1;
+  let i = start;
+  while (i < text.length && depth > 0) {
+    if (text[i] === "[") depth++;
+    else if (text[i] === "]") depth--;
+    i++;
   }
-  return blocks;
-}
-
-function countItems(text, field) {
-  return extractArrayBlocks(text, field).map((block) => {
-    const byDate = (block.match(/date:\s*"/g) || []).length;
-    const byName = (block.match(/name:\s*"/g) || []).length;
-    return byDate || byName;
-  });
+  return text.slice(start, i - 1);
 }
 
 function checkKoEnParity() {
-  section("2. KO/EN 데이터 항목 수 일치 검증");
+  section("2. ko/en 오버레이 작성 여부 검증");
   const text = readFileSync(CONSTANTS_PATH, "utf-8");
 
   const fields = {
-    awards: "수상 이력",
-    patents: "특허",
-    publications: "저널 논문",
-    conferences: "학술대회 발표",
+    AWARDS: "수상 이력",
+    PATENTS: "특허",
+    PUBLICATIONS: "저널 논문",
+    CONFERENCES: "학술대회 발표",
+    EDUCATION: "학력",
+    OVERSEAS_EXPERIENCES: "해외연수",
   };
 
-  for (const [field, label] of Object.entries(fields)) {
-    const counts = countItems(text, field);
-    if (counts.length < 2) {
-      console.log(`${WARN} ${label}: 섹션을 찾지 못했습니다 (수동 확인 필요)`);
-      warnings.push(`${label} 섹션 파싱 실패`);
+  for (const [name, label] of Object.entries(fields)) {
+    const block = extractArrayBlock(text, name);
+    if (block === null) {
+      console.log(`${WARN} ${label}: ${name} 배열을 찾지 못했습니다 (수동 확인 필요)`);
+      warnings.push(`${label} 배열 파싱 실패`);
       continue;
     }
-    const [ko, en] = counts;
-    if (ko === en) {
-      console.log(`${PASS} ${label}: KO=${ko}, EN=${en} 일치`);
+    const ko = (block.match(/ko:\s*\{/g) || []).length;
+    const en = (block.match(/en:\s*\{/g) || []).length;
+    if (ko > 0 && ko === en) {
+      console.log(`${PASS} ${label}: ${ko}건 (모든 항목에 ko/en 작성됨)`);
     } else {
-      console.log(`${FAIL} ${label}: KO=${ko}, EN=${en} 불일치 — 누락 항목 확인 필요`);
-      errors.push(`${label} KO/EN 항목 수 불일치 (KO=${ko}, EN=${en})`);
+      console.log(`${FAIL} ${label}: ko=${ko}, en=${en} — 오버레이 누락 항목 확인 필요`);
+      errors.push(`${label} ko/en 오버레이 불일치 (ko=${ko}, en=${en})`);
     }
   }
 }

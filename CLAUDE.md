@@ -42,7 +42,7 @@ push 후 Actions 실행이 성공했는지 확인한다
 
 | 파일 | 역할 |
 |------|------|
-| `src/constants.tsx` | 모든 콘텐츠 데이터 (`DATA_KO` + `DATA_EN`) |
+| `src/constants.tsx` | 모든 콘텐츠 데이터 (공통 + ko/en 오버레이 → `DATA_KO`/`DATA_EN` 자동 조립) |
 | `src/types.ts` | TypeScript 인터페이스 정의 |
 | `src/App.tsx` | 메인 앱 (모든 섹션 렌더링) |
 | `src/components/Sidebar.tsx` | 좌측 내비게이션 사이드바 |
@@ -61,17 +61,20 @@ push 후 Actions 실행이 성공했는지 확인한다
 
 ## 데이터 수정 규칙
 
-**모든 콘텐츠는 `DATA_KO`와 `DATA_EN` 두 곳을 반드시 함께 수정한다.**
-한 곳만 수정하면 언어 전환 시 데이터가 어긋난다.
+콘텐츠는 `src/constants.tsx`의 **공통 필드 + ko/en 오버레이** 구조다.
+항목은 배열(`PUBLICATIONS`, `CONFERENCES`, `PATENTS`, `AWARDS`, `EDUCATION`,
+`OVERSEAS_EXPERIENCES`)에 **한 번만** 추가하고, 언어 무관 필드(날짜·타입 등)는
+공통에, 언어별 텍스트는 `ko`/`en` 블록에 **둘 다** 작성한다.
+`DATA_KO`/`DATA_EN`은 파일 하단의 `buildData()`가 자동 조립하므로 직접 수정하지 않는다.
 
-### 수상 (`awards`) — 최신순 정렬
+### 수상 (`AWARDS`) — 최신순 정렬
 
 ```ts
 {
   date: "YYYY.MM",
-  title: "수상명 (등급)",       // 예: "CAU-Junior 융합연구그룹 (우수상)"
-  issuer: "수여 기관",
-  rank: "gold" | "silver" | "bronze"
+  rank: "gold" | "silver" | "bronze",
+  ko: { title: "수상명 (등급)", issuer: "수여 기관" },
+  en: { title: "Award Name (Grade)", issuer: "Issuer" }
 }
 ```
 
@@ -79,26 +82,29 @@ push 후 Actions 실행이 성공했는지 확인한다
 - `silver` — 우수상, 우수논문상, Excellence/Best Paper
 - `bronze` — 장려상, 동상, Encouragement Award
 
-### 논문 (`publications` = 저널 / `conferences` = 학술대회)
+### 논문 (`PUBLICATIONS` = 저널 / `CONFERENCES` = 학술대회)
 
-- 날짜 형식 `"YYYY.MM"`, 최신순 정렬
-- KO 데이터의 제목은 `"한글 제목\n(영문 제목)"` 형식
+- 공통: `date: "YYYY.MM"`, `type` — 최신순 정렬
+- `ko`/`en`: `title`, `authors`, `journalOrConference`, (선택) `note`
+- KO 제목은 `"한글 제목\n(영문 제목)"` 형식
 - 본인 이름("이병천"/"Byeongcheon Lee"/"B. Lee")은 자동 강조되므로 표기만 정확히
 
-### 특허 (`patents`)
+### 특허 (`PATENTS`)
 
-- 등록 완료 시 기존 출원 항목에 `(출원) / (등록)` 형식으로 병기
-  (예: `date: "2024.11.14 (출원) / 2026.02.27 (등록)"`)
+- 공통: `type`만 — 날짜·번호는 `(출원)/(등록)` 병기 표기가 언어별이라 `ko`/`en`에 작성
+- 등록 완료 시 기존 출원 항목에 병기:
+  ko `"2024.11.14 (출원) / 2026.02.27 (등록)"` / en `"2024.11.14 (Filing) / 2026.02.27 (Reg.)"`
 
 ### 콘텐츠 변경 시 필수 동반 수정
 
-`DATA_KO`와 `DATA_EN` **두 곳 모두** `lastUpdatedDate`를 오늘 날짜(`"YYYY.MM.DD"`)로 갱신한다.
+`UI_KO`와 `UI_EN` **두 곳 모두** `lastUpdatedDate`를 오늘 날짜(`"YYYY.MM.DD"`)로 갱신한다.
 
 ## 금지 사항
 
 - `gh-pages` 브랜치를 직접 수정하거나 checkout하지 않는다
 - `dist/`, `node_modules/`를 커밋하지 않는다
-- `DATA_KO`/`DATA_EN` 중 한쪽만 수정하지 않는다
+- 항목의 `ko`/`en` 오버레이 중 한쪽만 작성하지 않는다 (타입 오류로 빌드 실패)
+- `DATA_KO`/`DATA_EN` export를 직접 수정하지 않는다 (`buildData()`가 조립)
 - `vite.config.ts`의 `base: '/'`를 변경하지 않는다 (user site는 루트 경로)
 - `public/images/profile.jpg`를 임의로 교체·삭제하지 않는다
 - 검증(`node scripts/validate.js`) 없이 push하지 않는다 — **push가 곧 배포다**
@@ -126,8 +132,7 @@ push 후 Actions 실행이 성공했는지 확인한다
   2~3개를 이미지·요약과 함께 소개하는 섹션 (2026.07.12 사용자가 추후 진행 결정)
 - **Google Scholar·ORCID 링크** — 프로필 개설 후 프로필 카드와
   `index.html`의 JSON-LD `sameAs`에 추가 (아직 계정 없음)
-- **CV PDF 다운로드 버튼** — CV 파일이 준비되면 `ui`에 문자열 복원 후 추가
-- **KO/EN 데이터 구조 분리** — 날짜·저자·번호 같은 언어 무관 데이터를 공통
-  객체로 분리해 중복·불일치 위험 제거 (대규모 리팩토링이므로 별도 진행)
+- **디자인된 CV PDF 파일로 교체** — 현재 CV 버튼은 `window.print()` 기반
+  (항상 최신 데이터 반영). 별도 디자인의 CV PDF가 준비되면 파일 링크로 교체
 - **og:image 전용 이미지 제작** — 현재 세로형 프로필 사진 대신 1200×630
   가로형 이미지

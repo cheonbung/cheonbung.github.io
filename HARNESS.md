@@ -35,18 +35,19 @@ GitHub Actions 성공 확인      # 저장소 → Actions 탭 (1~2분 소요)
 
 ## 데이터 추가 방법
 
-모든 콘텐츠는 `src/constants.tsx` 한 파일에 있다.  
-한국어(`DATA_KO`)와 영어(`DATA_EN`) **두 곳을 반드시 같이** 수정해야 한다.
+모든 콘텐츠는 `src/constants.tsx` 한 파일에 있다.
+항목마다 **공통 필드 + `ko`/`en` 오버레이**를 함께 작성한다 — 항목은 배열에
+한 번만 추가하면 되고, 한쪽 언어를 빠뜨리면 타입 오류로 빌드가 실패한다.
 
 ### 수상 이력 추가
 
 ```ts
-// DATA_KO.awards 와 DATA_EN.awards 각각에 추가 (최신순)
+// AWARDS 배열에 추가 (최신순)
 {
   date: "YYYY.MM",
-  title: "수상명 (등급)",
-  issuer: "수여 기관",
-  rank: "gold" | "silver" | "bronze"
+  rank: "gold" | "silver" | "bronze",
+  ko: { title: "수상명 (등급)", issuer: "수여 기관" },
+  en: { title: "Award Name (Grade)", issuer: "Issuer" }
 }
 ```
 
@@ -59,13 +60,14 @@ rank 기준:
 
 ### 논문 추가
 
-- 저널 논문 → `publications` 배열
-- 학술대회 → `conferences` 배열
-- 두 언어 섹션 모두 수정
+- 저널 논문 → `PUBLICATIONS` 배열
+- 학술대회 → `CONFERENCES` 배열
+- 공통: `date`, `type` / `ko`·`en`: `title`, `authors`, `journalOrConference`, `note`
 
 ### 특허 추가
 
-`patents` 배열에 추가. 두 언어 섹션 모두 수정.
+`PATENTS` 배열에 추가. 공통은 `type`뿐이고 날짜·번호·제목·발명자·출원인은
+`ko`/`en`에 작성한다 (출원/등록 병기 표기가 언어별이라서).
 
 ---
 
@@ -85,7 +87,8 @@ Claude는 매 대화 시작 시 `CLAUDE.md`를 읽고 컨텍스트를 파악한�
 
 ### Claude에게 기대하는 행동
 
-1. `src/constants.tsx`의 KO/EN 두 곳 모두 수정 (+ `lastUpdatedDate` 갱신)
+1. `src/constants.tsx`의 해당 배열에 항목 추가 — `ko`/`en` 오버레이 모두 작성
+   (+ `UI_KO`/`UI_EN`의 `lastUpdatedDate` 갱신)
 2. `node scripts/validate.js` 실행으로 검증
 3. `git commit` + `git push origin main` → Actions가 자동 배포
 4. Actions 실행 성공 확인 (실패 시 `npm run deploy` 폴백)
@@ -101,7 +104,7 @@ node scripts/validate.js
 | 검증 항목 | 설명 |
 |----------|------|
 | 빌드 성공 | `npm run build`가 오류 없이 완료되는지 |
-| KO/EN 일치 | 수상·논문·특허 항목 수가 두 언어에서 동일한지 |
+| ko/en 오버레이 | 모든 항목에 `ko`/`en` 블록이 둘 다 작성됐는지 |
 | rank 유효성 | `gold`/`silver`/`bronze` 외 값이 없는지 |
 | date 포맷 | `YYYY.MM` 형식을 따르는지 |
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { User, BookOpen, GraduationCap, Award, FileText, Menu, X, ScrollText, Globe } from 'lucide-react';
+import { User, BookOpen, Download, GraduationCap, Award, FileText, Menu, X, ScrollText, Globe } from 'lucide-react';
 import { PortfolioData, Language } from '../types';
 
 interface SidebarProps {
@@ -122,6 +122,13 @@ const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Language Toggle & Footer */}
         <div className="p-6 border-t border-slate-700 bg-slate-900">
+          <button
+            onClick={() => window.print()}
+            className="w-full mb-3 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold py-2 rounded-lg transition-colors"
+          >
+            <Download size={16} />
+            {ui.downloadResume}
+          </button>
           <div className="flex items-center justify-between mb-4 bg-slate-800 rounded-lg p-1">
             <button
               onClick={() => setLanguage('KO')}
