@@ -7,6 +7,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Google tag (gtag.js) — 실제 도메인에서만 집계 (로컬 개발 서버 방문 제외) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X50NR2463V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    if (location.hostname === 'cheonbung.github.io') {
+      gtag('config', 'G-X50NR2463V');
+    }
+  </script>
+
   <title>이병천 (Byeongcheon Lee) - AI & Security Researcher Portfolio</title>
 
   <meta name="description"

@@ -141,5 +141,10 @@ push 후 Actions 실행이 성공했는지 확인한다
   별도 디자인의 CV PDF가 필요해지면 파일 링크로 교체
 - **og:image 전용 이미지 제작** — 현재 세로형 프로필 사진 대신 1200×630
   가로형 이미지 (2026.07.12 가로형 이미지가 없어 보류)
-- **방문 통계 도입** — GA4 또는 GoatCounter. 사용자 계정과 측정 ID가
-  필요해서 보류 (ID가 준비되면 index.html에 스니펫 추가)
+
+## 방문 통계 (GA4)
+
+- 2026.07.12 도입 완료 — `index.html`에 gtag 스니펫, 측정 ID `G-X50NR2463V`
+- `location.hostname === 'cheonbung.github.io'`일 때만 `gtag('config')`를
+  호출해 로컬 개발 서버 방문은 집계에서 제외한다 — 이 가드를 제거하지 않는다
+- 대시보드: https://analytics.google.com
