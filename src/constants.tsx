@@ -73,9 +73,9 @@ const PROFILE_KO: Profile = {
   affiliation: "중앙대학교 융합보안학과",
   bio: (
     <>
-      안녕하세요, 중앙대학교 융합보안학과 <strong className="text-slate-900 font-bold">PURE 연구실</strong>(지도교수 노승민)의 박사 과정 <strong className="text-slate-900 font-bold">이병천</strong>입니다.
+      안녕하세요, 중앙대학교 융합보안학과 <strong className="text-slate-900 dark:text-slate-100 font-bold">PURE 연구실</strong>(지도교수 노승민)의 박사 과정 <strong className="text-slate-900 dark:text-slate-100 font-bold">이병천</strong>입니다.
       <br /><br />
-      안전하고 투명한 AI 시스템 구축에 기여하고자 <strong className="text-slate-900 font-bold">머신 언러닝</strong>, <strong className="text-slate-900 font-bold">생성 모델 보안</strong>, <strong className="text-slate-900 font-bold">시계열 이상탐지</strong> 등을 중심으로 '<strong className="text-slate-900 font-bold">신뢰할 수 있는 AI(Trustworthy AI)</strong>'를 연구하고 있습니다. 다수의 SCIE 논문 게재와 특허 실적을 통해 연구의 깊이를 더해왔으며, 이러한 연구 역량을 바탕으로 AI 보안 문제를 해결하는 실용적인 솔루션을 만드는 것이 제 목표입니다.
+      안전하고 투명한 AI 시스템 구축에 기여하고자 <strong className="text-slate-900 dark:text-slate-100 font-bold">머신 언러닝</strong>, <strong className="text-slate-900 dark:text-slate-100 font-bold">생성 모델 보안</strong>, <strong className="text-slate-900 dark:text-slate-100 font-bold">시계열 이상탐지</strong> 등을 중심으로 '<strong className="text-slate-900 dark:text-slate-100 font-bold">신뢰할 수 있는 AI(Trustworthy AI)</strong>'를 연구하고 있습니다. 다수의 SCIE 논문 게재와 특허 실적을 통해 연구의 깊이를 더해왔으며, 이러한 연구 역량을 바탕으로 AI 보안 문제를 해결하는 실용적인 솔루션을 만드는 것이 제 목표입니다.
     </>
   )
 };
@@ -87,9 +87,9 @@ const PROFILE_EN: Profile = {
   affiliation: "Dept. of Convergence Security, Chung-Ang Univ.",
   bio: (
     <>
-      Hello, I am <strong className="text-slate-900 font-bold">Byeongcheon Lee</strong>, a Ph.D. student at the <strong className="text-slate-900 font-bold">PURE Lab</strong> (advised by Prof. Seungmin Rho), Department of Convergence Security, Chung-Ang University.
+      Hello, I am <strong className="text-slate-900 dark:text-slate-100 font-bold">Byeongcheon Lee</strong>, a Ph.D. student at the <strong className="text-slate-900 dark:text-slate-100 font-bold">PURE Lab</strong> (advised by Prof. Seungmin Rho), Department of Convergence Security, Chung-Ang University.
       <br /><br />
-      To contribute to building safe and transparent AI systems, I study <strong className="text-slate-900 font-bold">Trustworthy AI</strong> with a focus on <strong className="text-slate-900 font-bold">Machine Unlearning</strong>, <strong className="text-slate-900 font-bold">Generative Model Security</strong>, and <strong className="text-slate-900 font-bold">Time Series Anomaly Detection</strong>. I have deepened my research through multiple SCIE publications and patents, and my goal is to build on this foundation to create practical solutions to AI security problems.
+      To contribute to building safe and transparent AI systems, I study <strong className="text-slate-900 dark:text-slate-100 font-bold">Trustworthy AI</strong> with a focus on <strong className="text-slate-900 dark:text-slate-100 font-bold">Machine Unlearning</strong>, <strong className="text-slate-900 dark:text-slate-100 font-bold">Generative Model Security</strong>, and <strong className="text-slate-900 dark:text-slate-100 font-bold">Time Series Anomaly Detection</strong>. I have deepened my research through multiple SCIE publications and patents, and my goal is to build on this foundation to create practical solutions to AI security problems.
     </>
   )
 };
@@ -1530,6 +1530,8 @@ const UI_KO: UIStrings = {
   emailLabel: "이메일",
   visitProfile: "프로필 방문",
   downloadResume: "이력서 다운로드 (PDF)",
+  skipToContent: "본문으로 건너뛰기",
+  themeToggle: "다크 모드",
   rankLabels: { gold: "최우수", silver: "우수", bronze: "장려" },
   stats: {
     journals: "저널 논문",
@@ -1560,6 +1562,8 @@ const UI_EN: UIStrings = {
   emailLabel: "Email",
   visitProfile: "Visit Profile",
   downloadResume: "Download CV (PDF)",
+  skipToContent: "Skip to content",
+  themeToggle: "Dark mode",
   rankLabels: { gold: "Gold", silver: "Silver", bronze: "Bronze" },
   stats: {
     journals: "Journals",

@@ -2,6 +2,8 @@ import React from 'react';
 
 export type Language = 'KO' | 'EN';
 
+export type Theme = 'light' | 'dark';
+
 export interface Education {
   period: string;
   degree: string;
@@ -116,6 +118,8 @@ export interface UIStrings {
   emailLabel: string;
   visitProfile: string;
   downloadResume: string;
+  skipToContent: string;
+  themeToggle: string;
   rankLabels: Record<AwardRank, string>;
   stats: {
     journals: string;

@@ -59,9 +59,27 @@
   }
   </script>
 
+  <!-- 저장된 테마(또는 시스템 설정)를 첫 페인트 전에 적용해 깜빡임 방지 -->
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) { }
+  </script>
+
   <style>
     body {
       font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    }
+
+    :root {
+      color-scheme: light;
+    }
+
+    :root.dark {
+      color-scheme: dark;
     }
 
     @page {
@@ -85,7 +103,7 @@
   </style>
 </head>
 
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
   <div id="root"></div>
   <script type="module" src="/src/index.tsx"></script>
 </body>

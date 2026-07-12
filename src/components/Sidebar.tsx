@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { User, BookOpen, Download, GraduationCap, Award, FileText, Menu, X, ScrollText, Globe } from 'lucide-react';
-import { PortfolioData, Language } from '../types';
+import React, { useEffect, useRef } from 'react';
+import { User, BookOpen, Download, GraduationCap, Award, FileText, Menu, Moon, Sun, X, ScrollText, Globe } from 'lucide-react';
+import { PortfolioData, Language, Theme } from '../types';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,12 +9,15 @@ interface SidebarProps {
   data: PortfolioData;
   language: Language;
   setLanguage: (lang: Language) => void;
+  theme: Theme;
+  toggleTheme: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
-  isOpen, toggleSidebar, activeSection, data, language, setLanguage
+  isOpen, toggleSidebar, activeSection, data, language, setLanguage, theme, toggleTheme
 }) => {
   const ui = data.ui;
+  const asideRef = useRef<HTMLElement>(null);
 
   const navItems = [
     { id: 'about', label: ui.about, icon: User },
@@ -28,8 +31,31 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   useEffect(() => {
     if (!isOpen) return;
+    const focusables = (): HTMLElement[] =>
+      asideRef.current
+        ? Array.from(asideRef.current.querySelectorAll<HTMLElement>('button, a[href]'))
+        : [];
+    // 열릴 때 메뉴 안으로 포커스 이동, 닫힐 때 원래 위치로 복원
+    const prevFocus = document.activeElement as HTMLElement | null;
+    focusables()[0]?.focus();
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') toggleSidebar();
+      if (e.key === 'Escape') {
+        toggleSidebar();
+        return;
+      }
+      // Tab 포커스를 열린 메뉴 안에 가둔다
+      if (e.key !== 'Tab') return;
+      const els = focusables();
+      if (els.length === 0) return;
+      const first = els[0];
+      const last = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener('keydown', onKeyDown);
     // 모바일 메뉴가 열려 있는 동안 뒷배경 스크롤 잠금
@@ -44,6 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('resize', onResize);
       document.body.style.overflow = prevOverflow;
+      prevFocus?.focus();
     };
   }, [isOpen, toggleSidebar]);
 
@@ -62,30 +89,38 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 w-full bg-white z-50 border-b border-gray-200 px-4 py-3 flex items-center justify-between shadow-sm">
-        <span className="font-bold text-lg text-slate-800">{data.profile.name}</span>
+      <div className="lg:hidden fixed top-0 left-0 w-full bg-white dark:bg-slate-900 z-50 border-b border-gray-200 dark:border-slate-700 px-4 py-3 flex items-center justify-between shadow-sm">
+        <span className="font-bold text-lg text-slate-800 dark:text-slate-100">{data.profile.name}</span>
         <div className="flex items-center gap-2">
-          <div className="flex bg-slate-100 rounded-lg p-0.5">
+          <div className="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-0.5">
             <button
               onClick={() => setLanguage('KO')}
               aria-pressed={language === 'KO'}
-              className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${language === 'KO' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
+              className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${language === 'KO' ? 'bg-white dark:bg-slate-600 text-slate-800 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
             >
               한글
             </button>
             <button
               onClick={() => setLanguage('EN')}
               aria-pressed={language === 'EN'}
-              className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${language === 'EN' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
+              className={`text-xs font-bold px-2.5 py-1 rounded-md transition-colors ${language === 'EN' ? 'bg-white dark:bg-slate-600 text-slate-800 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
             >
               ENG
             </button>
           </div>
           <button
+            onClick={toggleTheme}
+            aria-label={ui.themeToggle}
+            aria-pressed={theme === 'dark'}
+            className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
+          >
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          <button
             onClick={toggleSidebar}
             aria-label={ui.menu}
             aria-expanded={isOpen}
-            className="p-2 text-slate-600 hover:bg-slate-100 rounded-lg"
+            className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -94,6 +129,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar Container */}
       <aside
+        ref={asideRef}
         className={`
           fixed top-0 left-0 h-full bg-slate-900 text-white z-40 transition-transform duration-300 ease-in-out w-64
           lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}
@@ -142,20 +178,30 @@ const Sidebar: React.FC<SidebarProps> = ({
             <Download size={16} />
             {ui.downloadResume}
           </button>
-          <div className="flex items-center justify-between mb-4 bg-slate-800 rounded-lg p-1">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="flex flex-1 items-center justify-between bg-slate-800 rounded-lg p-1">
+              <button
+                onClick={() => setLanguage('KO')}
+                aria-pressed={language === 'KO'}
+                className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${language === 'KO' ? 'bg-slate-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+              >
+                한글
+              </button>
+              <button
+                onClick={() => setLanguage('EN')}
+                aria-pressed={language === 'EN'}
+                className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${language === 'EN' ? 'bg-slate-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+              >
+                ENG
+              </button>
+            </div>
             <button
-              onClick={() => setLanguage('KO')}
-              aria-pressed={language === 'KO'}
-              className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${language === 'KO' ? 'bg-slate-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
+              onClick={toggleTheme}
+              aria-label={ui.themeToggle}
+              aria-pressed={theme === 'dark'}
+              className="p-2 bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors"
             >
-              한글
-            </button>
-            <button
-              onClick={() => setLanguage('EN')}
-              aria-pressed={language === 'EN'}
-              className={`flex-1 text-xs font-bold py-1.5 rounded-md transition-colors ${language === 'EN' ? 'bg-slate-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'}`}
-            >
-              ENG
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>
           </div>
           <div className="text-xs text-slate-400 text-center leading-relaxed">
