@@ -10,10 +10,20 @@ import {
   User, GraduationCap, FileText, Globe
 } from 'lucide-react';
 
+// 언어 초기값: URL(?lang=en) > 이전 방문 선택 > 한국어
+function getInitialLanguage(): Language {
+  const param = new URLSearchParams(window.location.search).get('lang')?.toUpperCase();
+  if (param === 'EN' || param === 'KO') return param;
+  try {
+    if (localStorage.getItem('lang') === 'EN') return 'EN';
+  } catch { /* 저장소 접근 불가 환경에서는 기본값 사용 */ }
+  return 'KO';
+}
+
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
-  const [language, setLanguage] = useState<Language>('KO');
+  const [language, setLanguage] = useState<Language>(getInitialLanguage);
   const [courseworkTab, setCourseworkTab] = useState<'grad' | 'undergrad'>('grad');
 
   const data = language === 'KO' ? DATA_KO : DATA_EN;
@@ -22,6 +32,9 @@ function App() {
   useEffect(() => {
     document.documentElement.lang = language === 'KO' ? 'ko' : 'en';
     document.title = data.ui.siteTitle;
+    try {
+      localStorage.setItem('lang', language);
+    } catch { /* 저장 실패는 무시 */ }
   }, [language, data.ui.siteTitle]);
 
   useEffect(() => {
@@ -424,6 +437,7 @@ function App() {
           <div className="inline-flex gap-2 mb-6 p-1 bg-slate-100 rounded-lg">
             <button
               onClick={() => setCourseworkTab('grad')}
+              aria-pressed={courseworkTab === 'grad'}
               className={`px-5 py-2 rounded-md text-sm font-bold transition-all shadow-sm ${courseworkTab === 'grad' ? 'bg-white text-blue-600' : 'text-slate-500 hover:text-slate-700 bg-transparent shadow-none'
                 }`}
             >
@@ -431,6 +445,7 @@ function App() {
             </button>
             <button
               onClick={() => setCourseworkTab('undergrad')}
+              aria-pressed={courseworkTab === 'undergrad'}
               className={`px-5 py-2 rounded-md text-sm font-bold transition-all shadow-sm ${courseworkTab === 'undergrad' ? 'bg-white text-blue-600' : 'text-slate-500 hover:text-slate-700 bg-transparent shadow-none'
                 }`}
             >

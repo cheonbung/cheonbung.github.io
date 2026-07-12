@@ -32,13 +32,26 @@ const Sidebar: React.FC<SidebarProps> = ({
       if (e.key === 'Escape') toggleSidebar();
     };
     window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    // 모바일 메뉴가 열려 있는 동안 뒷배경 스크롤 잠금
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    // 데스크톱 폭으로 커지면 메뉴를 닫아 잠금 해제
+    const onResize = () => {
+      if (window.innerWidth >= 1024) toggleSidebar();
+    };
+    window.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('resize', onResize);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [isOpen, toggleSidebar]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      element.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
       history.replaceState(null, '', `#${id}`);
     }
     if (window.innerWidth < 1024) {
