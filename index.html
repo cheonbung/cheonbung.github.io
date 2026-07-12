@@ -45,6 +45,9 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+  <!-- LCP 개선: 첫 화면의 프로필 사진을 JS 실행 전에 미리 받는다 -->
+  <link rel="preload" as="image" href="/images/profile.jpg" fetchpriority="high" />
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -127,6 +130,13 @@
 </head>
 
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+  <noscript>
+    <div style="max-width: 40rem; margin: 4rem auto; padding: 0 1.5rem; text-align: center; line-height: 1.7;">
+      <p>이 사이트는 JavaScript가 필요합니다. 브라우저에서 JavaScript를 활성화해 주세요.</p>
+      <p>This site requires JavaScript. Please enable it in your browser.</p>
+      <p>문의: qudcjs0208@cau.ac.kr · <a href="https://github.com/cheonbung">github.com/cheonbung</a></p>
+    </div>
+  </noscript>
   <div id="root"></div>
 </body>
 

@@ -6,6 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 - 페이지를 찾을 수 없습니다</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Google tag (gtag.js) — 깨진 링크 유입도 통계에 잡히도록 404에도 포함 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X50NR2463V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    if (location.hostname === 'cheonbung.github.io') {
+      gtag('config', 'G-X50NR2463V');
+    }
+  </script>
   <style>
     :root {
       color-scheme: light dark;
