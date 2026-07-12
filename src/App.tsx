@@ -86,7 +86,8 @@ function App() {
     <>
     {/* 인쇄(PDF 저장) 시에는 화면 레이아웃 대신 CV 형식으로 출력 */}
     <PrintCV data={data} />
-    <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row font-sans text-slate-700 print:hidden">
+    {/* break-keep: 한국어 단어가 중간에서 잘리지 않게 어절 단위로 줄바꿈 (break-words는 넘침 방지용 보조) */}
+    <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row font-sans text-slate-700 break-keep break-words print:hidden">
       <Sidebar
         isOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
@@ -119,7 +120,7 @@ function App() {
                   return (
                     <div key={idx} className="flex items-center justify-between bg-slate-50 border border-slate-100 p-3 md:p-4 rounded-xl hover:shadow-sm hover:border-blue-100 transition-all group">
                       <div className="flex items-center gap-2.5 md:gap-3 text-slate-500 font-bold uppercase text-[10px] md:text-xs tracking-wider">
-                        <div className="p-1 md:p-1.5 bg-slate-50 rounded-lg group-hover:bg-blue-50 transition-colors">
+                        <div className="p-1 md:p-1.5 bg-white border border-slate-100 rounded-lg group-hover:bg-blue-50 transition-colors">
                           <Icon size={14} className="md:w-4 md:h-4 group-hover:text-blue-600" />
                         </div>
                         {stat.label}
@@ -159,7 +160,7 @@ function App() {
 
               <div className="flex flex-wrap gap-2.5">
                 {data.profile.interests.map((interest, idx) => (
-                  <span key={idx} className="px-3.5 py-1.5 bg-indigo-50/80 text-indigo-600 rounded-full text-sm font-semibold border border-indigo-100/50 hover:bg-indigo-100 transition-colors cursor-default">
+                  <span key={idx} className="px-3.5 py-1.5 bg-indigo-50/80 text-indigo-600 rounded-full text-sm font-semibold border border-indigo-100/50">
                     #{interest}
                   </span>
                 ))}
@@ -268,9 +269,9 @@ function App() {
                     <p className="text-sm text-slate-600 mb-3 leading-relaxed">
                       {formatAuthors(pub.authors)}
                     </p>
-                    <div className="flex justify-between items-center text-xs md:text-sm">
+                    <div className="flex flex-wrap justify-between items-center gap-x-3 gap-y-1 text-xs md:text-sm">
                       <span className="font-semibold text-blue-700 italic">{pub.journalOrConference}</span>
-                      <span className="text-slate-500 font-mono">{pub.date}</span>
+                      <span className="text-slate-500 font-mono ml-auto">{pub.date}</span>
                     </div>
                   </div>
                 ))}
@@ -334,15 +335,15 @@ function App() {
                   {/* Patent Metadata Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6 text-xs text-slate-500 pt-2 border-t border-slate-50">
                     <div className="flex flex-col gap-1">
-                      <span className="font-bold text-slate-500 uppercase tracking-tighter">Number</span>
+                      <span className="font-bold text-slate-500 uppercase tracking-wide">Number</span>
                       <span className="text-slate-700 font-medium bg-slate-50 px-2 py-1 rounded">{patent.number}</span>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <span className="font-bold text-slate-500 uppercase tracking-tighter">Date</span>
+                      <span className="font-bold text-slate-500 uppercase tracking-wide">Date</span>
                       <span className="text-slate-700 font-medium bg-slate-50 px-2 py-1 rounded">{patent.date}</span>
                     </div>
                     <div className="flex flex-col gap-1 sm:col-span-2">
-                      <span className="font-bold text-slate-500 uppercase tracking-tighter">Applicant</span>
+                      <span className="font-bold text-slate-500 uppercase tracking-wide">Applicant</span>
                       <span className="text-slate-700 font-medium bg-slate-50 px-2 py-1 rounded">{patent.applicant}</span>
                     </div>
                   </div>
