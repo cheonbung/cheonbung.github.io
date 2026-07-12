@@ -138,24 +138,24 @@ const PrintCV = ({ data }: { data: PortfolioData }) => {
         {data.education.map((edu, idx) => <EducationItem key={idx} edu={edu} />)}
       </CVSection>
 
-      {/* 저널 논문 */}
+      {/* 저널 논문 (오름차순: 오래된 것부터) */}
       <CVSection title={ui.journalPapers}>
-        {data.publications.map((pub, idx) => (
-          <PaperItem key={idx} pub={pub} index={data.publications.length - idx} />
+        {[...data.publications].reverse().map((pub, idx) => (
+          <PaperItem key={idx} pub={pub} index={idx + 1} />
         ))}
       </CVSection>
 
-      {/* 학술대회 발표 */}
+      {/* 학술대회 발표 (오름차순) */}
       <CVSection title={ui.confPresentations}>
-        {data.conferences.map((conf, idx) => (
-          <PaperItem key={idx} pub={conf} index={data.conferences.length - idx} />
+        {[...data.conferences].reverse().map((conf, idx) => (
+          <PaperItem key={idx} pub={conf} index={idx + 1} />
         ))}
       </CVSection>
 
-      {/* 특허 */}
+      {/* 특허 (오름차순) */}
       <CVSection title={ui.patents}>
-        {data.patents.map((patent, idx) => (
-          <PatentItem key={idx} patent={patent} index={data.patents.length - idx} />
+        {[...data.patents].reverse().map((patent, idx) => (
+          <PatentItem key={idx} patent={patent} index={idx + 1} />
         ))}
       </CVSection>
 
