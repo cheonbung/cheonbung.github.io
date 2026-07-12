@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Section from './components/Section';
+import PrintCV from './components/PrintCV';
 import { DATA_KO, DATA_EN } from './constants';
 import { Language } from './types';
 import {
@@ -82,7 +83,10 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row font-sans text-slate-700">
+    <>
+    {/* 인쇄(PDF 저장) 시에는 화면 레이아웃 대신 CV 형식으로 출력 */}
+    <PrintCV data={data} />
+    <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row font-sans text-slate-700 print:hidden">
       <Sidebar
         isOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
@@ -92,7 +96,7 @@ function App() {
         setLanguage={setLanguage}
       />
 
-      <main className="flex-1 lg:ml-64 p-4 lg:p-12 pt-20 lg:pt-12 print:ml-0 print:pt-4 transition-all duration-300 max-w-5xl mx-auto w-full">
+      <main className="flex-1 lg:ml-64 p-4 lg:p-12 pt-20 lg:pt-12 transition-all duration-300 max-w-5xl mx-auto w-full">
 
         {/* Profile Section */}
         <Section id="about" title={data.ui.about} icon={User}>
@@ -463,6 +467,7 @@ function App() {
 
       </main>
     </div>
+    </>
   );
 }
 

@@ -127,8 +127,9 @@ cheonbung.github.io/
 │   ├── types.ts           # TypeScript 인터페이스
 │   ├── App.tsx            # 메인 컴포넌트
 │   └── components/
-│       ├── Sidebar.tsx    # 프로필 사이드바
-│       └── Section.tsx    # 섹션 렌더러
+│       ├── Sidebar.tsx    # 프로필 사이드바 (CV 다운로드 버튼)
+│       ├── Section.tsx    # 섹션 렌더러
+│       └── PrintCV.tsx    # 인쇄 시에만 출력되는 CV 레이아웃
 ├── public/
 │   ├── favicon.svg        # 파비콘
 │   ├── robots.txt         # 검색엔진 크롤링 설정

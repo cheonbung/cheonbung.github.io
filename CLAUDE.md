@@ -45,8 +45,9 @@ push 후 Actions 실행이 성공했는지 확인한다
 | `src/constants.tsx` | 모든 콘텐츠 데이터 (공통 + ko/en 오버레이 → `DATA_KO`/`DATA_EN` 자동 조립) |
 | `src/types.ts` | TypeScript 인터페이스 정의 |
 | `src/App.tsx` | 메인 앱 (모든 섹션 렌더링) |
-| `src/components/Sidebar.tsx` | 좌측 내비게이션 사이드바 |
+| `src/components/Sidebar.tsx` | 좌측 내비게이션 사이드바 (CV 다운로드 버튼 포함) |
 | `src/components/Section.tsx` | 섹션 래퍼 컴포넌트 |
+| `src/components/PrintCV.tsx` | 인쇄(PDF 저장) 시에만 출력되는 CV 레이아웃 |
 | `scripts/validate.js` | push 전 검증 스크립트 |
 | `.github/workflows/deploy.yml` | push 시 자동 배포 워크플로우 |
 | `HARNESS.md` | 사람이 읽는 운영 가이드 |
@@ -132,7 +133,8 @@ push 후 Actions 실행이 성공했는지 확인한다
   2~3개를 이미지·요약과 함께 소개하는 섹션 (2026.07.12 사용자가 추후 진행 결정)
 - **Google Scholar·ORCID 링크** — 프로필 개설 후 프로필 카드와
   `index.html`의 JSON-LD `sameAs`에 추가 (아직 계정 없음)
-- **디자인된 CV PDF 파일로 교체** — 현재 CV 버튼은 `window.print()` 기반
-  (항상 최신 데이터 반영). 별도 디자인의 CV PDF가 준비되면 파일 링크로 교체
+- **디자인된 CV PDF 파일로 교체** — 현재 CV 버튼은 `window.print()` +
+  인쇄 전용 CV 레이아웃(`PrintCV.tsx`) 기반이라 항상 최신 데이터가 반영됨.
+  별도 디자인의 CV PDF가 필요해지면 파일 링크로 교체
 - **og:image 전용 이미지 제작** — 현재 세로형 프로필 사진 대신 1200×630
   가로형 이미지
