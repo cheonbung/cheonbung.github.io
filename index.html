@@ -74,11 +74,11 @@
   }
   </script>
 
-  <!-- 저장된 테마(또는 시스템 설정)를 첫 페인트 전에 적용해 깜빡임 방지 -->
+  <!-- 저장된 테마를 첫 페인트 전에 적용해 깜빡임 방지 (최초 방문 기본값은 항상 라이트) -->
   <script>
     try {
       var t = localStorage.getItem('theme');
-      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      if (t === 'dark') {
         document.documentElement.classList.add('dark');
       }
     } catch (e) { }
@@ -125,7 +125,7 @@
       }
     }
   </style>
-  <script type="module" crossorigin src="/assets/index-B9JOuw-A.js"></script>
+  <script type="module" crossorigin src="/assets/index-CTQyCPHI.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-B8f-AqRZ.css">
 </head>
 
