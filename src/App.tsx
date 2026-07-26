@@ -10,14 +10,14 @@ import {
   User, GraduationCap, FileText, Globe
 } from 'lucide-react';
 
-// 언어 초기값: URL(?lang=en) > 이전 방문 선택 > 한국어
+// 언어 초기값: URL(?lang=ko) > 이전 방문 선택 > 영어
 function getInitialLanguage(): Language {
   const param = new URLSearchParams(window.location.search).get('lang')?.toUpperCase();
   if (param === 'EN' || param === 'KO') return param;
   try {
-    if (localStorage.getItem('lang') === 'EN') return 'EN';
+    if (localStorage.getItem('lang') === 'KO') return 'KO';
   } catch { /* 저장소 접근 불가 환경에서는 기본값 사용 */ }
-  return 'KO';
+  return 'EN';
 }
 
 function App() {
