@@ -1525,7 +1525,7 @@ const UI_KO: UIStrings = {
   undergradCourses: "학부",
   designedBy: "Designed for academic presentation.",
   lastUpdated: "최종 업데이트",
-  lastUpdatedDate: "2026.07.12",
+  lastUpdatedDate: "2026.07.26",
   menu: "메뉴",
   emailLabel: "이메일",
   visitProfile: "프로필 방문",
@@ -1533,6 +1533,14 @@ const UI_KO: UIStrings = {
   skipToContent: "본문으로 건너뛰기",
   themeToggle: "다크 모드",
   rankLabels: { gold: "최우수", silver: "우수", bronze: "장려" },
+  typeLabels: {
+    SCIE: "SCIE",
+    SSCI: "SSCI",
+    Domestic: "국내",
+    "International Conference": "국제 학회",
+    "Domestic Conference": "국내 학회",
+    PCT: "PCT"
+  },
   stats: {
     journals: "저널 논문",
     conferences: "학술대회",
@@ -1557,7 +1565,7 @@ const UI_EN: UIStrings = {
   undergradCourses: "Undergraduate",
   designedBy: "Designed for academic presentation.",
   lastUpdated: "Last Updated",
-  lastUpdatedDate: "2026.07.12",
+  lastUpdatedDate: "2026.07.26",
   menu: "Menu",
   emailLabel: "Email",
   visitProfile: "Visit Profile",
@@ -1565,6 +1573,14 @@ const UI_EN: UIStrings = {
   skipToContent: "Skip to content",
   themeToggle: "Dark mode",
   rankLabels: { gold: "Gold", silver: "Silver", bronze: "Bronze" },
+  typeLabels: {
+    SCIE: "SCIE",
+    SSCI: "SSCI",
+    Domestic: "KR Domestic",
+    "International Conference": "International Conference",
+    "Domestic Conference": "Domestic Conference",
+    PCT: "PCT"
+  },
   stats: {
     journals: "Journals",
     conferences: "Conferences",

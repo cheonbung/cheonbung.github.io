@@ -79,8 +79,8 @@ function App() {
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  const displayType = (type: string) =>
-    language === 'EN' && type === 'Domestic' ? 'KR Domestic' : type;
+  // 타입 배지는 언어별 표기 맵을 따른다 (SCIE/SSCI/PCT 같은 고유 약어는 그대로, 국내/국제만 현지화)
+  const displayType = (type: string) => data.ui.typeLabels[type] ?? type;
 
   const getAwardIconStyle = (rank?: string) => {
     if (rank === 'gold') return 'bg-yellow-50 text-yellow-500 dark:bg-yellow-950 dark:text-yellow-400';
@@ -359,7 +359,7 @@ function App() {
                 <div className="shrink-0">
                   <div className={`w-auto px-4 min-w-[3.5rem] h-14 rounded-xl flex items-center justify-center font-bold text-white text-sm shadow-sm ${patent.type === 'PCT' ? 'bg-indigo-500' : 'bg-slate-600'
                     }`}>
-                    {patent.type}
+                    {displayType(patent.type)}
                   </div>
                 </div>
                 <div className="flex-1 space-y-3">

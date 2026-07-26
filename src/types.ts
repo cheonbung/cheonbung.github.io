@@ -121,6 +121,7 @@ export interface UIStrings {
   skipToContent: string;
   themeToggle: string;
   rankLabels: Record<AwardRank, string>;
+  typeLabels: Record<string, string>; // 논문/특허/학회 타입 배지의 언어별 표기
   stats: {
     journals: string;
     conferences: string;

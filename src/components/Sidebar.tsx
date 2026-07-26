@@ -138,7 +138,8 @@ const Sidebar: React.FC<SidebarProps> = ({
         `}
       >
         <div className="p-6 border-b border-slate-700 hidden lg:block">
-          <h1 className="text-xl font-bold tracking-tight">{data.profile.name}</h1>
+          {/* 본문 프로필의 h1과 중복되지 않도록 사이드바 이름은 제목 계층에서 제외 (p로 표기) */}
+          <p className="text-xl font-bold tracking-tight">{data.profile.name}</p>
           <p className="text-slate-400 text-sm mt-1">{data.profile.role}</p>
           <p className="text-xs text-slate-400 mt-2 font-light">{data.profile.email}</p>
         </div>
