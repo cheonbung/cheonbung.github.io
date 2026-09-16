@@ -646,10 +646,10 @@ const OVERSEAS_EXPERIENCES: Localized<Omit<OverseasExperience, 'title'>, Pick<Ov
       "Group Projects"
     ],
     ko: {
-      title: "2026년도 영국 University of Oxford 글로벌 사이버보안 인재 양성 교육프로그램 파견교육 예정"
+      title: "2026년도 영국 University of Oxford 글로벌 사이버보안 인재 양성 교육프로그램 파견교육 (진행 중)"
     },
     en: {
-      title: "2026 University of Oxford Global Cybersecurity Talent Training Program (Scheduled)"
+      title: "2026 University of Oxford Global Cybersecurity Talent Training Program (In Progress)"
     }
   }
 ];
@@ -1335,6 +1335,66 @@ const PATENTS: Localized<Pick<Patent, 'type'>, Omit<Patent, 'type'>>[] =
   {
     type: "Domestic",
     ko: {
+      date: "2026.09.15",
+      number: "10-2026-0176036",
+      title: "표현 소거 및 유용성 복원의 디커플링을 이용한 머신 언러닝 방법 및 그 장치\n(Machine unlearning method and apparatus using decoupling of expression erasure and usefulness restoration)",
+      inventors: [
+        "이미영",
+        "노승민",
+        "박성우",
+        "김상민",
+        "이병천",
+        "박형준"
+      ],
+      applicant: "중앙대학교 산학협력단"
+    },
+    en: {
+      date: "2026.09.15",
+      number: "10-2026-0176036",
+      title: "Machine unlearning method and apparatus using decoupling of expression erasure and usefulness restoration",
+      inventors: [
+        "Miyoung Lee",
+        "Seungmin Rho",
+        "Sungwoo Park",
+        "Sangmin Kim",
+        "Byeongcheon Lee",
+        "Hyungjun Park"
+      ],
+      applicant: "Chung-Ang University Industry-Academic Cooperation Foundation"
+    }
+  },
+  {
+    type: "Domestic",
+    ko: {
+      date: "2026.09.15",
+      number: "10-2026-0176035",
+      title: "출력 기반 디노이징 앵커링 대조 학습을 이용한 확산 모델에서의 강건한 개념 소거 방법 및 그 장치\n(Robust concept elimination method and apparatus in a diffusion model using output-based denoising, anchoring, and contrast learning)",
+      inventors: [
+        "이미영",
+        "노승민",
+        "박성우",
+        "김상민",
+        "이병천"
+      ],
+      applicant: "중앙대학교 산학협력단"
+    },
+    en: {
+      date: "2026.09.15",
+      number: "10-2026-0176035",
+      title: "Robust concept elimination method and apparatus in a diffusion model using output-based denoising, anchoring, and contrast learning",
+      inventors: [
+        "Miyoung Lee",
+        "Seungmin Rho",
+        "Sungwoo Park",
+        "Sangmin Kim",
+        "Byeongcheon Lee"
+      ],
+      applicant: "Chung-Ang University Industry-Academic Cooperation Foundation"
+    }
+  },
+  {
+    type: "Domestic",
+    ko: {
       date: "2025.09.17",
       number: "10-2025-0133282",
       title: "판별기 기반 조건부 생성적 적대 신경망에서의 선택적 데이터 망각 방법 및 시스템\n(Method for selective data forgetting in discriminator-based conditional generative adversarial networks)",
@@ -1525,7 +1585,7 @@ const UI_KO: UIStrings = {
   undergradCourses: "학부",
   designedBy: "Designed for academic presentation.",
   lastUpdated: "최종 업데이트",
-  lastUpdatedDate: "2026.07.26",
+  lastUpdatedDate: "2026.09.16",
   menu: "메뉴",
   emailLabel: "이메일",
   visitProfile: "프로필 방문",
@@ -1565,7 +1625,7 @@ const UI_EN: UIStrings = {
   undergradCourses: "Undergraduate",
   designedBy: "Designed for academic presentation.",
   lastUpdated: "Last Updated",
-  lastUpdatedDate: "2026.07.26",
+  lastUpdatedDate: "2026.09.16",
   menu: "Menu",
   emailLabel: "Email",
   visitProfile: "Visit Profile",
